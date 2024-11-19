@@ -30,20 +30,25 @@ const handler = NextAuth({
     async session({ session, token }) {
       if (token?.email) {
         const loggedInUser = await prisma.user.findUnique({
-          where: { email: token.email },
+            where: { email: token.email },
         });
 
-        if (loggedInUser && session.user) {
-          session.user.id = loggedInUser.id;
+                if (loggedInUser && session.user) {
+                    session.user.id = loggedInUser.id;
+                }
+            }
+            return session;
+        },
+        redirect({ url, baseUrl }) {
+            // Check if the URL is on the same origin (domain) as the base URL.
+            if (url.startsWith(baseUrl)) {
+                return url; // Redirect back to the requested page.
+            }
+            // Otherwise, redirect to a safe default (e.g., home page).
+            return `${baseUrl}/home`;
         }
-      }
-      return session;
+
     },
-    async redirect({ url, baseUrl }) {
-        console.log(url);
-        return `${baseUrl}/home`
-    }
-  },
 } as AuthOptions);
 
 export { handler as GET, handler as POST };
