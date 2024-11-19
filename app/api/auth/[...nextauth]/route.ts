@@ -39,6 +39,9 @@ const handler = NextAuth({
       }
       return session;
     },
+    async redirect({ url, baseUrl }) {
+        return `${baseUrl}/home`
+    }
   },
   pages: {
     signIn: "/auth/signin",
