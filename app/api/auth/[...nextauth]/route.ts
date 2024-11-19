@@ -40,11 +40,9 @@ const handler = NextAuth({
       return session;
     },
     async redirect({ url, baseUrl }) {
+        console.log(url);
         return `${baseUrl}/home`
     }
-  },
-  pages: {
-    signIn: "/auth/signin",
   },
 } as AuthOptions);
 
