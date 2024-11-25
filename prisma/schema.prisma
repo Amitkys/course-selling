@@ -18,28 +18,31 @@ model User {
   email      String    @unique
   name       String?
   avatar     String?
-  rollNumber String?   // Roll number mapped to the Google account
+  rollNumber String?
   opinions   Opinion[] // A user can write many opinions
   reactions  Reaction[] // A user can react to many opinions
-  isActive   Boolean   @default(false) // Only active users can log in and interact
+  isActive   Boolean   @default(false)
 }
 
 model Opinion {
-  id         String    @id @default(uuid()) @db.Uuid
-  teacher    String
-  statement  String
-  createdAt  DateTime  @default(now())
-  author     User      @relation(fields: [authorId], references: [id])
-  authorId   String
-  reactions  Reaction[] // An opinion can have many reactions (likes/dislikes)
+  id           String    @id @default(uuid()) @db.Uuid
+  teacher      String
+  statement    String
+  createdAt    DateTime  @default(now())
+  author       User      @relation(fields: [authorId], references: [id])
+  authorId     String    @db.Uuid
+  reactions    Reaction[]
+  likeCount    Int       @default(0) // Stores the count of likes
+  dislikeCount Int       @default(0) // Stores the count of dislikes
 }
+
 
 model Reaction {
   id         String    @id @default(uuid()) @db.Uuid
   opinion    Opinion   @relation(fields: [opinionId], references: [id])
-  opinionId  String
+  opinionId  String    @db.Uuid
   user       User      @relation(fields: [userId], references: [id])
-  userId     String
+  userId     String    @db.Uuid
   type       ReactionType
   createdAt  DateTime  @default(now())
 
@@ -50,3 +53,4 @@ enum ReactionType {
   LIKE
   DISLIKE
 }
+
