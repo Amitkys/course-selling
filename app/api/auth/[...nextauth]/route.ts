@@ -11,7 +11,6 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      // console.log(user)
       const existingUser = await prisma.user.findFirst({
         where: {
           AND: [
@@ -20,28 +19,34 @@ const handler = NextAuth({
           ]
         },
       });
-      console.log('user exist already');
-      
+  
+      // If the user does not exist, deny login
       if (!existingUser) {
         const isVerifiedUser = await prisma.user.findFirst({
           where: {
             AND: [
-              {email: user.email || ""},
-              {isActive: true}
+              { email: user.email || "" },
+              { isActive: true }
             ]
           },
         });
-
-        if (isVerifiedUser) {
-          await prisma.user.update({
-            where: { email: user.email || "" },
-            data: {
-              name: user.name,
-              avatar: user.image,
-            }
-          });
+  
+        // If not a verified user, return false to prevent sign-in
+        if (!isVerifiedUser) {
+          return false;  // Denies sign-in if the user doesn't exist or is not verified
         }
+  
+        // If verified, create the user or update their details
+        await prisma.user.update({
+          where: { email: user.email || "" },
+          data: {
+            name: user.name,
+            avatar: user.image,
+          }
+        });
       }
+  
+      // If everything is okay, allow login
       return true;
     },
     async session({ session, token }) {
