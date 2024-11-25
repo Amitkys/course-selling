@@ -12,18 +12,35 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ user }) {
       // console.log(user)
-      const existingUser = await prisma.user.findUnique({
-        where: { email: user.email || "" },
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          AND: [
+            { email: user.email || "" },
+            { name: user.name || "" }
+          ]
+        },
       });
-
+      console.log('user exist already');
+      
       if (!existingUser) {
-        await prisma.user.create({
-          data: {
-            name: user.name || "",
-            email: user.email || "",
-            avatar: user.image || "",
+        const isVerifiedUser = await prisma.user.findFirst({
+          where: {
+            AND: [
+              {email: user.email || ""},
+              {isActive: true}
+            ]
           },
         });
+
+        if (isVerifiedUser) {
+          await prisma.user.update({
+            where: { email: user.email || "" },
+            data: {
+              name: user.name,
+              avatar: user.image,
+            }
+          });
+        }
       }
       return true;
     },
