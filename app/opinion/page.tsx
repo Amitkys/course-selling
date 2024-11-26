@@ -1,6 +1,9 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { addOpinion } from "@/lib/action";
+
+
 
 export default  function opinion() {
     const {data: session} = useSession();
@@ -12,8 +15,9 @@ export default  function opinion() {
         const finalData = {
             statement: formData.get("statement"),
             teacher: formData.get("teacher"),
-           authorId: session?.user.id 
+        //    authorId: session?.user.id 
         }
+        const kys = addOpinion(finalData);
         console.log(finalData);
     }
     return (

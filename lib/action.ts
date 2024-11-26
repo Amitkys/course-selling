@@ -1,11 +1,12 @@
+"use server";
 import prisma from "@/lib/db";
 
-interface FormData{
-    
-}
 
-export async function addOpinion(formData){
-    const data = await prisma.opinion.create({
-        data: formData
-    }) 
+export async function addOpinion(formData: FormData){
+    console.log(formData);
+    // const res = await prisma.opinion.create({
+    //     data: {
+            
+    //     }
+    // })
 }
