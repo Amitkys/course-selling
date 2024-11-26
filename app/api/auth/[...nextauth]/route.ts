@@ -1,6 +1,7 @@
 import prisma from "@/lib/db";
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { RoleType } from '@prisma/client';
 
 const handler = NextAuth({
   providers: [
@@ -11,37 +12,21 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      const existingUser = await prisma.user.findFirst({
-        where: {
-          AND: [
-            { email: user.email || "" },
-            { name: user.name || "" }
-          ]
-        },
+      const existingUser = await prisma.user.findUnique({
+        where: { email: user.email || "" }
       });
   
       // If the user does not exist, deny login
       if (!existingUser) {
-        const isVerifiedUser = await prisma.user.findFirst({
-          where: {
-            AND: [
-              { email: user.email || "" },
-              { isActive: true }
-            ]
-          },
-        });
   
-        // If not a verified user, return false to prevent sign-in
-        if (!isVerifiedUser) {
-          return false;  // Denies sign-in if the user doesn't exist or is not verified
-        }
   
         // If verified, create the user or update their details
-        await prisma.user.update({
-          where: { email: user.email || "" },
+        await prisma.user.create({
           data: {
-            name: user.name,
-            avatar: user.image,
+            name: user.name || "",
+            email: user.email || "",
+            avatar: user.image || "",
+            role: RoleType.USER
           }
         });
       }
