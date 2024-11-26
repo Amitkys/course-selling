@@ -49,6 +49,11 @@ model Reaction {
   @@unique([opinionId, userId]) // Prevents a user from reacting to the same opinion multiple times
 }
 
+model EmailWithRoll{
+  email String  @unique
+  rollNumber String 
+}
+
 enum ReactionType {
   LIKE
   DISLIKE
