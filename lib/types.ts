@@ -18,3 +18,7 @@ export interface Opinion{
     teacher: TeacherName;
     authorId: string;
 }
+export interface addNewStudentType{
+    email: string;
+    rollNumber: string;
+}
