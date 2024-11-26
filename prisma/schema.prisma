@@ -17,12 +17,11 @@ datasource db {
 model User {
   id         String    @id @default(uuid()) @db.Uuid
   email      String    @unique
-  name       String?
-  avatar     String?
-  rollNumber String?
+  name       String
+  avatar     String
+  role       RoleType
   opinions   Opinion[] // A user can write many opinions
   reactions  Reaction[] // A user can react to many opinions
-  isActive   Boolean   @default(false)
 }
 
 model Opinion {
@@ -55,3 +54,7 @@ enum ReactionType {
   DISLIKE
 }
 
+enum RoleType{
+  USER
+  ADMIN
+}

@@ -1,19 +1,19 @@
-/*
-  Warnings:
-
-  - A unique constraint covering the columns `[email]` on the table `User` will be added. If there are existing duplicate values, this will fail.
-  - Added the required column `email` to the `User` table without a default value. This is not possible if the table is not empty.
-
-*/
 -- CreateEnum
 CREATE TYPE "ReactionType" AS ENUM ('LIKE', 'DISLIKE');
 
--- AlterTable
-ALTER TABLE "User" ADD COLUMN     "avatar" TEXT,
-ADD COLUMN     "email" TEXT NOT NULL,
-ADD COLUMN     "isActive" BOOLEAN NOT NULL DEFAULT false,
-ADD COLUMN     "rollNumber" TEXT,
-ALTER COLUMN "name" DROP NOT NULL;
+-- CreateEnum
+CREATE TYPE "RoleType" AS ENUM ('USER', 'ADMIN');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" UUID NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "avatar" TEXT NOT NULL,
+    "role" "RoleType" NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Opinion" (
@@ -40,10 +40,10 @@ CREATE TABLE "Reaction" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Reaction_opinionId_userId_key" ON "Reaction"("opinionId", "userId");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+CREATE UNIQUE INDEX "Reaction_opinionId_userId_key" ON "Reaction"("opinionId", "userId");
 
 -- AddForeignKey
 ALTER TABLE "Opinion" ADD CONSTRAINT "Opinion_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
