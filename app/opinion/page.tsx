@@ -50,10 +50,11 @@ export default  function opinion() {
                     id="statement"
                     placeholder="write your opinion"
                     required
+                    className="mb-2"
                 ></Textarea>
                 
-                <Select name="teacher">
-                    <SelectTrigger className="w-[180px]">
+                <Select  name="teacher">
+                    <SelectTrigger className="w-[180px] mb-2">
                         <SelectValue placeholder="Select Teacher"></SelectValue>
                     </SelectTrigger>
                     <SelectContent>
@@ -63,7 +64,7 @@ export default  function opinion() {
                     </SelectContent>
                 </Select> 
 
-                <Button variant={"secondary"} type="submit">submit</Button>
+                <Button  type="submit">Submit</Button>
             </form>
         </div>
 
