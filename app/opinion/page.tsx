@@ -3,7 +3,11 @@
 import { useSession } from "next-auth/react";
 import { addOpinion } from "@/lib/action";
 
-
+interface Opinion {
+    statement: string;
+    teacher: string;
+    authorId: string;
+}
 
 export default  function opinion() {
     const {data: session} = useSession();
