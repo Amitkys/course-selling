@@ -4,9 +4,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { addNewStudentType } from "@/lib/types";
 import { addNewStudent } from "@/lib/action";
+import { useToast } from "@/hooks/use-toast";
 
 
 export default function InputWithLabel() {
+    const {toast} = useToast();
+
     const formHandler = async (event: React.FormEvent) => {
         event.preventDefault();
 
@@ -19,6 +22,7 @@ export default function InputWithLabel() {
 
         // console.log(data);
         await addNewStudent(data);
+        toast({description: 'New Student Added'});
 
     }
   return (
