@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { TeacherName } from "@prisma/client";
 
 // add this code for removing red squally in 'id'
 declare module "next-auth" {
@@ -10,4 +11,10 @@ declare module "next-auth" {
             image?: string | null;
         };
     }
+}
+
+export interface Opinion{
+    statement: string;
+    teacher: TeacherName;
+    authorId: string;
 }

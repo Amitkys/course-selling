@@ -2,12 +2,9 @@
 
 import { useSession } from "next-auth/react";
 import { addOpinion } from "@/lib/action";
+import { Opinion } from "@/lib/types";
+import { TeacherName } from "@prisma/client";
 
-interface Opinion {
-    statement: string;
-    teacher: string;
-    authorId: string;
-}
 
 export default  function opinion() {
     const {data: session} = useSession();
@@ -20,8 +17,15 @@ export default  function opinion() {
 
         const data: Opinion = {
             statement: formData.get("statement") as string,
-            teacher: formData.get("teacher") as string,
+            teacher: formData.get("teacher") as TeacherName,
             authorId: session?.user?.id ?? "",
+        }
+
+        try{
+            await addOpinion(data);
+            console.log('data added');
+        }catch(e){
+            console.log('something went wrong', e);
         }
     }
     return (
