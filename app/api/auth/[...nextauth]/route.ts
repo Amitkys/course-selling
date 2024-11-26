@@ -12,15 +12,14 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
+      // if user exist, return true(allow signin)
       const existingUser = await prisma.user.findUnique({
         where: { email: user.email || "" }
       });
   
-      // If the user does not exist, deny login
+      // If the user does not exist, create user
       if (!existingUser) {
-  
-  
-        // If verified, create the user or update their details
+        // user creation 
         await prisma.user.create({
           data: {
             name: user.name || "",
@@ -31,8 +30,7 @@ const handler = NextAuth({
         });
       }
   
-      // If everything is okay, allow login
-      return true;
+      return true; // allow signin
     },
     async session({ session, token }) {
       if (token?.email) {
