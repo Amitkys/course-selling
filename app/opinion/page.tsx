@@ -7,6 +7,14 @@ import { TeacherName } from "@prisma/client";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 
 
@@ -35,8 +43,7 @@ export default  function opinion() {
     return (
         <div>
             <form action="" onSubmit={handleSubmit}>
-                <label htmlFor="statement">Write Statement</label>
-                <br />
+                <Label htmlFor="statement">Write Statement</Label>
 
                 <Textarea
                     name="statement"
@@ -44,16 +51,17 @@ export default  function opinion() {
                     placeholder="write your opinion"
                     required
                 ></Textarea>
-                <br />
                 
-                <label htmlFor="teacher">select teacher</label>
-                <br />
-                <select name="teacher" id="teacher">
-                    <option value="AMIT">AMIT</option>
-                    <option value="KISHOR">KISHOR</option>
-                </select>
-                <br />
-                <br />
+                <Select name="teacher">
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select Teacher"></SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="AMIT">Amit</SelectItem>
+                        <SelectItem value="KISHOR">Kishor</SelectItem>
+                        <SelectItem value="ROHAN">Rohan</SelectItem>
+                    </SelectContent>
+                </Select> 
 
                 <Button variant={"secondary"} type="submit">submit</Button>
             </form>
