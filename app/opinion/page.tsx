@@ -41,30 +41,32 @@ export default  function opinion() {
         }
     }
     return (
-        <div>
-            <form action="" onSubmit={handleSubmit}>
-                <Label htmlFor="statement">Write Statement</Label>
+        <div className="flex items-center  h-screen w-full flex-col">
+            <form className="w-full mt-20"  action="" onSubmit={handleSubmit}>
 
+                <Select name="teacher">
+                    <SelectTrigger className="w-[180px] text-sm lg:text-lg mb-3 font-bold">
+                        <SelectValue placeholder="Select Teacher"></SelectValue>
+                    </SelectTrigger>
+                    <SelectContent >
+                        <SelectItem className="text-sm lg:text-lg font-bold" value="AMIT">Amit</SelectItem>
+                        <SelectItem className="text-sm lg:text-lg font-bold" value="KISHOR">Kishor</SelectItem>
+                        <SelectItem className="text-sm lg:text-lg font-bold" value="ROHAN">Rohan</SelectItem>
+                    </SelectContent>
+                </Select>
+                
+                <Label className="text-sm lg:text-lg font-bold" htmlFor="statement">Write Statement</Label>
                 <Textarea
+                    rows={4}
                     name="statement"
                     id="statement"
                     placeholder="write your opinion"
                     required
-                    className="mb-2"
+                    className="mb-2  text-sm lg:text-lg font-bold"
                 ></Textarea>
-                
-                <Select  name="teacher">
-                    <SelectTrigger className="w-[180px] mb-2">
-                        <SelectValue placeholder="Select Teacher"></SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="AMIT">Amit</SelectItem>
-                        <SelectItem value="KISHOR">Kishor</SelectItem>
-                        <SelectItem value="ROHAN">Rohan</SelectItem>
-                    </SelectContent>
-                </Select> 
-
-                <Button  type="submit">Submit</Button>
+                <div className="flex justify-center">
+                    <Button className="font-bold w-full lg:w-1/3 " type="submit">Submit</Button>
+                </div>
             </form>
         </div>
 
