@@ -14,15 +14,15 @@ export default  function opinion() {
 
     const handleSubmit = async(event:React.FormEvent) => {
         event.preventDefault();
+
         // creating for data object
         const formData = new FormData(event.target as HTMLFormElement)
-        const finalData = {
-            statement: formData.get("statement"),
-            teacher: formData.get("teacher"),
-        //    authorId: session?.user.id 
+
+        const data: Opinion = {
+            statement: formData.get("statement") as string,
+            teacher: formData.get("teacher") as string,
+            authorId: session?.user?.id ?? "",
         }
-        const kys = addOpinion(finalData);
-        console.log(finalData);
     }
     return (
         <div>
