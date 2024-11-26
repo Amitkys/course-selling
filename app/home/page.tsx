@@ -1,12 +1,11 @@
-"use client"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
-import { signOut } from "next-auth/react"
-
-export default function home() {
-    return (
-        <div>
-           <button onClick={() => signOut}>Logout</button> 
-            <h1>Welcome to home app</h1>
-        </div>
-    )
+export default function SwitchDemo() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Switch id="airplane-mode" />
+      <Label htmlFor="airplane-mode">Airplane Mode</Label>
+    </div>
+  )
 }

@@ -4,6 +4,10 @@ import { useSession } from "next-auth/react";
 import { addOpinion } from "@/lib/action";
 import { Opinion } from "@/lib/types";
 import { TeacherName } from "@prisma/client";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+
 
 
 export default  function opinion() {
@@ -34,12 +38,12 @@ export default  function opinion() {
                 <label htmlFor="statement">Write Statement</label>
                 <br />
 
-                <textarea
+                <Textarea
                     name="statement"
                     id="statement"
                     placeholder="write your opinion"
                     required
-                ></textarea>
+                ></Textarea>
                 <br />
                 
                 <label htmlFor="teacher">select teacher</label>
@@ -51,7 +55,7 @@ export default  function opinion() {
                 <br />
                 <br />
 
-                <button type="submit">submit</button>
+                <Button variant={"secondary"} type="submit">submit</Button>
             </form>
         </div>
 
