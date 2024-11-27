@@ -69,55 +69,6 @@ export default async function CardWithForm() {
                 ))}
             </div>  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "<Card className="w-[350px]">
-                <CardHeader>
-                    <div className="flex justify-between mb-2" >
-                        <CardTitle>Anonymouse(***)</CardTitle> {/* star(*) stands for roll number */}
-                        <CardTitle>3m ago</CardTitle>
-                    </div>
-                    <hr />
-                    <div className="flex justify-center">
-                        <CardTitle className="text-green-600">Teacher: Amit Kumar</CardTitle>
-                    </div>
-                    <hr />
-                </CardHeader>
-                <CardContent className="flex justify-center mb-5">
-                    <CardDescription>Deploy your new project in one-click.</CardDescription>
-                    <br />
-                </CardContent>
-                <CardFooter className="flex justify-around">
-                    <button >
-                        <div className="flex flex-col justify-center">
-                            <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
-                            <div>5</div>
-                        </div>
-                    </button>
-                    <button>
-                        <div className="flex flex-col justify-center">
-                            <ThumbDownOutlinedIcon />
-                            <div>5</div>
-                        </div>
-                    </button>
-                </CardFooter>
-            </Card>"
         </div>
     )
 }
