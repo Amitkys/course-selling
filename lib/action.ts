@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { Opinion } from "@/lib/types";
 import { addNewStudentType } from "@/lib/types";
 
+// add feedback
 export async function addOpinion(data: Opinion) {
     const prismaData = {
         statement: data.statement,
@@ -16,6 +17,7 @@ export async function addOpinion(data: Opinion) {
     console.log(res);
 }
 
+// add new student with roll number
 export async function addNewStudent(data: addNewStudentType ) {
     const prismaData = {
         email: data.email,
@@ -27,4 +29,10 @@ export async function addNewStudent(data: addNewStudentType ) {
     });
 
     console.log('data added');
+}
+
+// getting all feedback
+export async function getPost() {
+    let data = await prisma.opinion.findMany();
+    return data;
 }
