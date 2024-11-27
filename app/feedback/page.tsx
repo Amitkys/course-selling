@@ -54,18 +54,23 @@ export default async function CardWithForm() {
                             <br />
                         </CardContent>
                         <CardFooter className="flex justify-around">
-                            <button >
-                                <div className="flex flex-col justify-center">
-                                    <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
-                                    <div>{post.likeCount}</div>
-                                </div>
-                            </button>
-                            <button>
-                                <div className="flex flex-col justify-center">
-                                    <ThumbDownOutlinedIcon />
-                                    <div>{post.dislikeCount}</div>
-                                </div>
-                            </button>
+                            {/*button 1 */}
+                            <div className="flex flex-col justify-center">
+                                <button >
+                                    <div>
+                                        <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
+                                    </div>
+                                </button>
+                                <div className="ml-1">{post.likeCount}</div>
+                            </div>
+                            <div className="flex justify-center flex-col">
+                                <button>
+                                    <div className="flex flex-col justify-center">
+                                        <ThumbDownOutlinedIcon />
+                                    </div>
+                                </button>
+                                <div className="ml-1">{post.dislikeCount}</div>
+                            </div>
                         </CardFooter>
                     </Card>
                 ))}
