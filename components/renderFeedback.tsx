@@ -66,7 +66,7 @@ export default  function CardWithForm({posts}: any) {
                                 <div className="ml-1">{post.likeCount}</div>
                             </div>
                             <div className="flex justify-center flex-col">
-                                <button onClick={async () => await handleDislike(post.id)}>
+                                <button onClick={async () =>  await handleDislike(post.id)}>
                                     <div className="flex flex-col justify-center">
                                         <ThumbDownOutlinedIcon />
                                     </div>
