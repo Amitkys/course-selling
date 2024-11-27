@@ -2,6 +2,8 @@
 import prisma from "@/lib/db";
 import { Opinion } from "@/lib/types";
 import { addNewStudentType } from "@/lib/types";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 
 // add feedback
 export async function addOpinion(data: Opinion) {

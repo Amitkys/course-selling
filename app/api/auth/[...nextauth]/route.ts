@@ -1,9 +1,9 @@
 import prisma from "@/lib/db";
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { RoleType } from '@prisma/client';
+import { RoleType } from "@prisma/client";
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -12,25 +12,22 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      // if user exist, return true(allow signin)
       const existingUser = await prisma.user.findUnique({
-        where: { email: user.email || "" }
+        where: { email: user.email || "" },
       });
-  
-      // If the user does not exist, create user
+
       if (!existingUser) {
-        // user creation 
         await prisma.user.create({
           data: {
             name: user.name || "",
             email: user.email || "",
             avatar: user.image || "",
-            role: RoleType.USER
-          }
+            role: RoleType.USER,
+          },
         });
       }
-  
-      return true; // allow signin
+
+      return true;
     },
     async session({ session, token }) {
       if (token?.email) {
@@ -44,16 +41,15 @@ const handler = NextAuth({
       }
       return session;
     },
-        redirect({ url, baseUrl }) {
-            // Check if the URL is on the same origin (domain) as the base URL.
-            if (url.startsWith(baseUrl)) {
-                return url; // Redirect back to the requested page.
-            }
-            // Otherwise, redirect to a safe default (e.g., home page).
-            return `${baseUrl}/home`;
-        }
-
+    redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) {
+        return url;
+      }
+      return `${baseUrl}/home`;
     },
-} as AuthOptions);
+  },
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

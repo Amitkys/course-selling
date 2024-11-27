@@ -22,7 +22,9 @@ import {
 
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'; // material ui/icon
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+// when user click on like button, then ThumbUp component should be appear
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// when user click on dislike button, then ThumbDown component should be appear
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // server action function
 import { getPost } from "@/lib/action"
