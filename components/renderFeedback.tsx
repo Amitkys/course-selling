@@ -32,11 +32,6 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import  {handleDislike, handleLike} from "@/lib/action";
 
 export default  function CardWithForm({posts}: any) {
-    let likedData: any;
-    let disLikedData: any;
-    // let isLiked: boolean = likedData.likeStatus;
-    let isDisliked: boolean;
-    console.log(likedData);
     return (
         <div>
             <h3>Students Feedback</h3>
@@ -62,20 +57,17 @@ export default  function CardWithForm({posts}: any) {
                             {/*button 1 */}
                             <div className="flex flex-col justify-center">
                                 {/* <LikeButton opinionId={post.id} /> */}
-                                <button onClick={async() => likedData = await handleLike(post.id)}>
+                                <button onClick={async() =>  await handleLike(post.id)}>
                                     <div>
-                                        {/* {
-                                            isLiked ?<ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>: <ThumbUpIcon />
-                                        } */}
-                                       <ThumbUpOutlinedIcon /> 
+                                        {(post.likeStatus) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
                                     </div>
                                 </button>
                                 <div className="ml-1">{post.likeCount}</div>
                             </div>
                             <div className="flex justify-center flex-col">
-                                <button onClick={async () => disLikedData= await handleDislike(post.id)}>
+                                <button onClick={async () =>  await handleDislike(post.id)}>
                                     <div className="flex flex-col justify-center">
-                                        <ThumbDownOutlinedIcon />
+                                        {(post.dislikeStatus) ? <ThumbDownIcon/>: <ThumbDownOutlinedIcon/> }
                                     </div>
                                 </button>
                                 <div className="ml-1">{post.dislikeCount}</div>
