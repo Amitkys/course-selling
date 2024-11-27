@@ -37,11 +37,27 @@ export async function getPost() {
         include: {
             author: {
                 select: {
-                    name: true, // Include only the author's name
+                    name: true, // Include author's name
+                    email: true, // Include author's email
                 },
             },
         },
     });
-    console.log(data[0]); // Check the structure of the data
-    return data;
+
+    // Add rollNumber by joining with EmailWithRoll model
+    const postsWithRollNumbers = await Promise.all(
+        data.map(async (post) => {
+            const emailWithRoll = await prisma.emailWithRoll.findUnique({
+                where: { email: post.author.email }, // Match on email
+                select: { rollNumber: true }, // Get the rollNumber
+            });
+
+            return {
+                ...post,
+                rollNumber: emailWithRoll?.rollNumber || "Unknown", // Include rollNumber or default value
+            };
+        })
+    );
+
+    return postsWithRollNumbers;
 }

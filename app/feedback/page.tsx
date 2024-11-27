@@ -22,6 +22,8 @@ import {
 
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'; // material ui/icon
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // server action function
 import { getPost } from "@/lib/action"
 
@@ -36,7 +38,7 @@ export default async function CardWithForm() {
                     <Card className="w-[350px]">
                         <CardHeader>
                             <div className="flex justify-between mb-2" >
-                                <CardTitle>{post.author.name}(***)</CardTitle> {/* star(*) stands for roll number */}
+                                <CardTitle>{post.author.name}({post.rollNumber})</CardTitle> {/* star(*) stands for roll number */}
                                 <CardTitle>3m ago</CardTitle>
                             </div>
                             <hr />
