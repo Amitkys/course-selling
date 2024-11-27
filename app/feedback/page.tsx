@@ -1,3 +1,4 @@
+// "use client";
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -24,7 +25,9 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 // server action function
 import { getPost } from "@/lib/action"
 
-export default function CardWithForm() {
+export default async function CardWithForm() {
+    const data = await getPost();
+    console.log('here is all post', data);
     return (
         <Card className="w-[350px]">
             <CardHeader>
@@ -37,7 +40,6 @@ export default function CardWithForm() {
                     <CardTitle className="text-green-600">Teacher: Amit Kumar</CardTitle>
                 </div>
                 <hr />
-                {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
             </CardHeader>
             <CardContent className="flex justify-center mb-5">
                 <CardDescription>Deploy your new project in one-click.</CardDescription>

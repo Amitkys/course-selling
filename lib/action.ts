@@ -1,4 +1,4 @@
-"use server";
+// "use server";
 import prisma from "@/lib/db";
 import { Opinion } from "@/lib/types";
 import { addNewStudentType } from "@/lib/types";
@@ -34,5 +34,6 @@ export async function addNewStudent(data: addNewStudentType ) {
 // getting all feedback
 export async function getPost() {
     let data = await prisma.opinion.findMany();
+    console.log(data[0]);
     return data;
 }
