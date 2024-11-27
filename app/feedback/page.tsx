@@ -29,7 +29,7 @@ export default function CardWithForm() {
         <Card className="w-[350px]">
             <CardHeader>
                 <div className="flex justify-between mb-2" >
-                    <CardTitle>Anonymouse(***)</CardTitle>
+                    <CardTitle>Anonymouse(***)</CardTitle> {/* star(*) stands for roll number */}
                     <CardTitle>3m ago</CardTitle>
                 </div>
                 <hr  />
