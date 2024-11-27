@@ -43,7 +43,8 @@ model Reaction {
   opinionId  String    @db.Uuid
   user       User      @relation(fields: [userId], references: [id])
   userId     String    @db.Uuid
-  type       ReactionType
+  likeStatus Boolean
+  dislikeStatus Boolean
   createdAt  DateTime  @default(now())
 
   @@unique([opinionId, userId]) // Prevents a user from reacting to the same opinion multiple times
