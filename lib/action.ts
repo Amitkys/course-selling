@@ -33,7 +33,15 @@ export async function addNewStudent(data: addNewStudentType ) {
 
 // getting all feedback
 export async function getPost() {
-    let data = await prisma.opinion.findMany();
-    console.log(data[0]);
+    const data = await prisma.opinion.findMany({
+        include: {
+            author: {
+                select: {
+                    name: true, // Include only the author's name
+                },
+            },
+        },
+    });
+    console.log(data[0]); // Check the structure of the data
     return data;
 }

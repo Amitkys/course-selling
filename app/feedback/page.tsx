@@ -36,7 +36,7 @@ export default async function CardWithForm() {
                     <Card className="w-[350px]">
                         <CardHeader>
                             <div className="flex justify-between mb-2" >
-                                <CardTitle>Anonymouse(***)</CardTitle> {/* star(*) stands for roll number */}
+                                <CardTitle>{post.author.name}(***)</CardTitle> {/* star(*) stands for roll number */}
                                 <CardTitle>3m ago</CardTitle>
                             </div>
                             <hr />
