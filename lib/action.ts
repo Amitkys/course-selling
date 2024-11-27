@@ -178,23 +178,15 @@ export async function handleLike(opinionId: string) {
         await increaseLike(opinionId); // Increase the like count
     }
 
-    // Fetch the updated counts
-    // const [likeCount, dislikeCount] = await Promise.all([
-    //     prisma.opinion.findUnique({
-    //         where: { id: opinionId },
-    //         select: { likeCount: true },
-    //     }),
-    //     prisma.opinion.findUnique({
-    //         where: { id: opinionId },
-    //         select: { dislikeCount: true },
-    //     }),
-    // ]);
-
-    // return {
-    //     likeCount: likeCount?.likeCount ?? 0,
-    //     dislikeCount: dislikeCount?.dislikeCount ?? 0,
-    // };
-    // revalidatePath('/feedback')
+    const likeStatus = await prisma.reaction.findUnique({
+        where: {
+            opinionId_userId: {
+                opinionId,
+                userId,
+            },
+        },
+    })
+    return likeStatus;
 }
 
 export async function handleDislike(opinionId: string) {
@@ -247,21 +239,13 @@ export async function handleDislike(opinionId: string) {
         await increaseDisLike(opinionId); // Increase the dislike count
     }
 
-    // Fetch the updated counts
-    // const [likeCount, dislikeCount] = await Promise.all([
-    //     prisma.opinion.findUnique({
-    //         where: { id: opinionId },
-    //         select: { likeCount: true },
-    //     }),
-    //     prisma.opinion.findUnique({
-    //         where: { id: opinionId },
-    //         select: { dislikeCount: true },
-    //     }),
-    // ]);
-
-    // return {
-    //     likeCount: likeCount?.likeCount ?? 0,
-    //     dislikeCount: dislikeCount?.dislikeCount ?? 0,
-    // };
-    // revalidatePath('/feedback');
+    const dislikeStatus = await prisma.reaction.findUnique({
+        where: {
+            opinionId_userId: {
+                opinionId,
+                userId,
+            },
+        },
+    })
+    return dislikeStatus;
 }
