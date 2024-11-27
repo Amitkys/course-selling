@@ -21,6 +21,8 @@ import {
 
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'; // material ui/icon
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+// server action function
+import { getPost } from "@/lib/action"
 
 export default function CardWithForm() {
     return (
