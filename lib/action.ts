@@ -68,6 +68,7 @@ export async function getPost() {
     return postsWithRollNumbers;
 }
 
+
 async function increaseLike(opinionId: string) {
     await prisma.opinion.update({
         where: {
@@ -79,7 +80,7 @@ async function increaseLike(opinionId: string) {
             },
         },
     });
-    // revalidatePath('/feedback')
+    revalidatePath('/feedback')
 }
 
 
@@ -94,6 +95,7 @@ async function decreaseLike(opinionId: string) {
             },
         },
     });
+    revalidatePath('/feedback')
 }
 
 async function increaseDisLike(opinionId: string) {
@@ -107,6 +109,7 @@ async function increaseDisLike(opinionId: string) {
             },
         },
     });
+    revalidatePath('/feedback')
 }
 
 async function decreaseDisLike(opinionId: string) {
@@ -120,6 +123,7 @@ async function decreaseDisLike(opinionId: string) {
             },
         },
     });
+    revalidatePath('/feedback')
 }
 
 
@@ -190,7 +194,7 @@ export async function handleLike(opinionId: string) {
     //     likeCount: likeCount?.likeCount ?? 0,
     //     dislikeCount: dislikeCount?.dislikeCount ?? 0,
     // };
-    revalidatePath('/feedback')
+    // revalidatePath('/feedback')
 }
 
 export async function handleDislike(opinionId: string) {
@@ -259,5 +263,5 @@ export async function handleDislike(opinionId: string) {
     //     likeCount: likeCount?.likeCount ?? 0,
     //     dislikeCount: dislikeCount?.dislikeCount ?? 0,
     // };
-    revalidatePath('/feedback');
+    // revalidatePath('/feedback');
 }

@@ -30,7 +30,6 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // server action function
 import  {handleDislike, handleLike} from "@/lib/action";
-import LikeButton from "@/components/LikeButton"
 
 export default  function CardWithForm({posts}: any) {
     return (
