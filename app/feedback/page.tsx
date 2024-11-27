@@ -26,12 +26,66 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import { getPost } from "@/lib/action"
 
 export default async function CardWithForm() {
-    const data = await getPost();
+    const posts = await getPost();
     // console.log('here is all post', data);
     return (
         <div>
             <h3>Students Feedback</h3>
-            <Card className="w-[350px]">
+            <div>
+                {posts.map((post) => (
+                    <Card className="w-[350px]">
+                        <CardHeader>
+                            <div className="flex justify-between mb-2" >
+                                <CardTitle>Anonymouse(***)</CardTitle> {/* star(*) stands for roll number */}
+                                <CardTitle>3m ago</CardTitle>
+                            </div>
+                            <hr />
+                            <div className="flex justify-center">
+                                <CardTitle className="text-green-600">Teacher: {post.teacher}</CardTitle>
+                            </div>
+                            <hr />
+                        </CardHeader>
+                        <CardContent className="flex justify-center mb-5">
+                            <CardDescription>{post.statement}</CardDescription>
+                            <br />
+                        </CardContent>
+                        <CardFooter className="flex justify-around">
+                            <button >
+                                <div className="flex flex-col justify-center">
+                                    <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
+                                    <div>{post.likeCount}</div>
+                                </div>
+                            </button>
+                            <button>
+                                <div className="flex flex-col justify-center">
+                                    <ThumbDownOutlinedIcon />
+                                    <div>{post.dislikeCount}</div>
+                                </div>
+                            </button>
+                        </CardFooter>
+                    </Card>
+                ))}
+            </div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            "<Card className="w-[350px]">
                 <CardHeader>
                     <div className="flex justify-between mb-2" >
                         <CardTitle>Anonymouse(***)</CardTitle> {/* star(*) stands for roll number */}
@@ -61,7 +115,7 @@ export default async function CardWithForm() {
                         </div>
                     </button>
                 </CardFooter>
-            </Card>
+            </Card>"
         </div>
     )
 }
