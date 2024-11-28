@@ -51,7 +51,7 @@ export async function getPost() {
             author: {
                 select: {
                     name: true, // Include author's name
-                    email: true, // Include author's email
+                    email: true, // Include author's email (KYS)
                 },
             },
             reactions: {

@@ -34,7 +34,7 @@ import  {handleDislike, handleLike} from "@/lib/action";
 export default  function CardWithForm({posts}: any) {
     return (
         <div>
-            <h3>Students Feedback</h3>
+            <h3>Students  Feedback</h3>
             <div>
                 {posts.map((post: any) => (
                     <Card key={post.id} className="w-[350px]">

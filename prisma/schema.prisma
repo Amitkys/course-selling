@@ -20,8 +20,8 @@ model User {
   name       String
   avatar     String
   role       RoleType
-  opinions   Opinion[] // A user can write many opinions
-  reactions  Reaction[] // A user can react to many opinions
+  opinions   Opinion[] 
+  reactions  Reaction[] 
 }
 
 model Opinion {
@@ -32,8 +32,8 @@ model Opinion {
   author       User      @relation(fields: [authorId], references: [id])
   authorId     String    @db.Uuid
   reactions    Reaction[]
-  likeCount    Int       @default(0) // Stores the count of likes
-  dislikeCount Int       @default(0) // Stores the count of dislikes
+  likeCount    Int       @default(0) 
+  dislikeCount Int       @default(0) 
 }
 
 
@@ -41,15 +41,15 @@ model Reaction {
   id         String    @id @default(uuid()) @db.Uuid
   opinion    Opinion   @relation(fields: [opinionId], references: [id])
   opinionId  String    @db.Uuid
+  // userId is reference from User table(foreign key)
   user       User      @relation(fields: [userId], references: [id])
   userId     String    @db.Uuid
   likeStatus Boolean
   dislikeStatus Boolean
   createdAt  DateTime  @default(now())
-
-  @@unique([opinionId, userId]) // Prevents a user from reacting to the same opinion multiple times
+// prevent the user for doing multple like and dislke on same Opinion(post) 
+  @@unique([opinionId, userId]) 
 }
-
 model EmailWithRoll{
   email String  @unique
   rollNumber String 
