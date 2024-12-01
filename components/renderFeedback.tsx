@@ -63,7 +63,9 @@ export default  function CardWithForm({posts, session}: any) {
                                         <div>
                                             {(post.likeStatus) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
                                         </div>
-                                    </button> :
+                                    </button>
+                                    // if user is not logged in, simply thow them a outline icon
+                                    :
                                     <button onClick={() => toast({title: 'Login to React'})}>
                                         <div>
                                             <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
