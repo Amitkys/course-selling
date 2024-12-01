@@ -36,12 +36,12 @@ export async function addNewStudent(data: addNewStudentType ) {
 
 // getting all feedback
 export async function getPost() {
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user) {
-        throw new Error("User not authenticated");
-    }
+    // const session = await getServerSession(authOptions);
+    // if (!session || !session.user) {
+    //     throw new Error("User not authenticated");
+    // }
 
-    const currentUserId = session.user.id;
+    // const currentUserId = session.user.id;
     // Fetch all opinions with author and reactions
     const data = await prisma.opinion.findMany({
         orderBy: {
@@ -54,13 +54,13 @@ export async function getPost() {
                     email: true, // Include author's email (KYS)
                 },
             },
-            reactions: {
-                where: { userId: currentUserId }, // Fetch reactions specific to the current user
-                select: {
-                    likeStatus: true,
-                    dislikeStatus: true,
-                },
-            },
+            // reactions: {
+            //     where: { userId: currentUserId }, // Fetch reactions specific to the current user
+            //     select: {
+            //         likeStatus: true,
+            //         dislikeStatus: true,
+            //     },
+            // },
         },
     });
 
@@ -75,8 +75,8 @@ export async function getPost() {
             return {
                 ...post,
                 rollNumber: emailWithRoll?.rollNumber || "Unknown", // Include rollNumber or default value
-                likeStatus: post.reactions[0]?.likeStatus || false, // Extract likeStatus from reactions
-                dislikeStatus: post.reactions[0]?.dislikeStatus || false, // Extract dislikeStatus from reactions
+                // likeStatus: post.reactions[0]?.likeStatus || false, // Extract likeStatus from reactions
+                // dislikeStatus: post.reactions[0]?.dislikeStatus || false, // Extract dislikeStatus from reactions
             };
         })
     );

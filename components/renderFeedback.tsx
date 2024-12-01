@@ -30,8 +30,10 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // server action function
 import  {handleDislike, handleLike} from "@/lib/action";
+import { useToast } from "@/hooks/use-toast";
 
-export default  function CardWithForm({posts}: any) {
+export default  function CardWithForm({posts, session}: any) {
+    const {toast} = useToast();
     return (
         <div>
             <h3>Students  Feedback</h3>
@@ -40,7 +42,7 @@ export default  function CardWithForm({posts}: any) {
                     <Card key={post.id} className="w-[350px]">
                         <CardHeader>
                             <div className="flex justify-between mb-2" >
-                                <CardTitle>{post.author.name}({post.rollNumber})</CardTitle> {/* star(*) stands for roll number */}
+                                <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle> 
                                 <CardTitle>3m ago</CardTitle>
                             </div>
                             <hr />
@@ -56,12 +58,18 @@ export default  function CardWithForm({posts}: any) {
                         <CardFooter className="flex justify-around">
                             {/*button 1 */}
                             <div className="flex flex-col justify-center">
-                                {/* <LikeButton opinionId={post.id} /> */}
-                                <button onClick={async() =>  await handleLike(post.id)}>
-                                    <div>
-                                        {(post.likeStatus) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
-                                    </div>
-                                </button>
+                                {session && session.user ?
+                                    <button onClick={async () => await handleLike(post.id)}>
+                                        <div>
+                                            {(post.likeStatus) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
+                                        </div>
+                                    </button> :
+                                    <button onClick={() => toast({title: 'Login to React'})}>
+                                        <div>
+                                            <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
+                                        </div>
+                                    </button>
+                                }
                                 <div className="ml-1">{post.likeCount}</div>
                             </div>
                             <div className="flex justify-center flex-col">
