@@ -72,22 +72,28 @@ export default  function CardWithForm({posts, session}: any) {
                                         </div>
                                     </button>
                                 }
+                                {/* always show like count */}
                                 <div className="ml-1">{post.likeCount}</div>
                             </div>
+
+                            {/* Dislike Button */}
                             <div className="flex justify-center flex-col">
+                                {/* if user logged in, enable dislike feature */}
                                 {session && session.user ?
-                                    <button onClick={async () => await handleDislike(post.id)}>
+                                    <button onClick={async () => await handleDislike(post.id)}> {/* handleDislike is a server function */}
                                         <div className="flex flex-col justify-center">
                                             {(post.dislikeStatus) ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />}
                                         </div>
-                                    </button> :
-
+                                    </button>
+                                    // if user is not logged in
+                                    :
                                     <button onClick={() => toast({ title: 'Login to React' })}>
                                         <div>
                                             <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
                                         </div>
                                     </button>
                                 }
+                                {/* dislike count */}
                                 <div className="ml-1">{post.dislikeCount}</div>
                             </div>
                         </CardFooter>
