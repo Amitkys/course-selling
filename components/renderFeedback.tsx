@@ -45,10 +45,13 @@ export default  function CardWithForm({posts, session}: any) {
                             <hr />
                         </CardHeader>
 
+                        {/* student feedback*/}
                         <CardContent className="flex justify-center mb-5">
                             <CardDescription>{post.statement}</CardDescription>
                             <br />
                         </CardContent>
+                        
+
                         <CardFooter className="flex justify-around">
                             {/*button 1 */}
                             <div className="flex flex-col justify-center">
