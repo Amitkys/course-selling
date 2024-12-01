@@ -28,11 +28,13 @@ export default  function CardWithForm({posts, session}: any) {
         <div>
             <h3>Students  Feedback</h3>
             <div>
-                {posts.map((post: any) => (
+                {posts.map((post: any) => ( // getting 'posts' from component props
                     <Card key={post.id} className="w-[350px]">
+
                         <CardHeader>
                             <div className="flex justify-between mb-2" >
-                                <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle> 
+                            {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
+                                <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
                                 <CardTitle>3m ago</CardTitle>
                             </div>
                             <hr />
@@ -41,6 +43,7 @@ export default  function CardWithForm({posts, session}: any) {
                             </div>
                             <hr />
                         </CardHeader>
+
                         <CardContent className="flex justify-center mb-5">
                             <CardDescription>{post.statement}</CardDescription>
                             <br />
