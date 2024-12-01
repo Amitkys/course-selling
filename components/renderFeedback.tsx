@@ -1,6 +1,6 @@
 
 "use client";
-import * as React from "react"
+// ui imports
 import {
     Card,
     CardContent,
@@ -11,14 +11,16 @@ import {
 } from "@/components/ui/card"
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'; // material ui/icon
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
-// when user click on like button, then ThumbUp component should be appear
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-// when user click on dislike button, then ThumbDown component should be appear
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+
 // server action function
 import  {handleDislike, handleLike} from "@/lib/action";
 
+// import utility
+import * as React from "react"
 import { useToast } from "@/hooks/use-toast";
+
 
 export default  function CardWithForm({posts, session}: any) {
     
