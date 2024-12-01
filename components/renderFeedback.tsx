@@ -73,11 +73,19 @@ export default  function CardWithForm({posts, session}: any) {
                                 <div className="ml-1">{post.likeCount}</div>
                             </div>
                             <div className="flex justify-center flex-col">
-                                <button onClick={async () =>  await handleDislike(post.id)}>
-                                    <div className="flex flex-col justify-center">
-                                        {(post.dislikeStatus) ? <ThumbDownIcon/>: <ThumbDownOutlinedIcon/> }
-                                    </div>
-                                </button>
+                                {session && session.user ?
+                                    <button onClick={async () => await handleDislike(post.id)}>
+                                        <div className="flex flex-col justify-center">
+                                            {(post.dislikeStatus) ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />}
+                                        </div>
+                                    </button> :
+
+                                    <button onClick={() => toast({ title: 'Login to React' })}>
+                                        <div>
+                                            <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
+                                        </div>
+                                    </button>
+                                }
                                 <div className="ml-1">{post.dislikeCount}</div>
                             </div>
                         </CardFooter>
