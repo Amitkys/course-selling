@@ -38,7 +38,7 @@ export default  function opinion() {
         try{
             await addOpinion(data);
             console.log('data added');
-            toast({description: "Post is created."})
+            toast({description: "Post is created.", variant: "kys"})
         }catch(e){
             console.log('something went wrong', e);
         }

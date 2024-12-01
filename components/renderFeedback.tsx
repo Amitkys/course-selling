@@ -27,12 +27,12 @@ export default  function CardWithForm({posts, session}: any) {
     const {toast} = useToast();
 
     return (
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center bg-zinc-900">
             <div className="">
                 <h3>Students  Feedback</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 justify-center">
                     {posts.map((post: any) => ( // getting 'posts' from component props
-                        <Card key={post.id} className="w-[350px] mx-auto">
+                        <Card key={post.id} className="w-[350px] mx-auto ">
 
                             {/* info about: user and teacher */}
                             <CardHeader>
@@ -69,7 +69,7 @@ export default  function CardWithForm({posts, session}: any) {
                                         </button>
                                         // if user is not logged in, simply thow them a outline icon
                                         :
-                                        <button onClick={() => toast({ title: 'Login to React' })}>
+                                        <button onClick={() => toast({ title: 'Login to React', variant: 'kys' })}>
                                             <div>
                                                 <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
                                             </div>
