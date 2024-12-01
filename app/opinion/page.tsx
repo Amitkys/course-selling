@@ -15,11 +15,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 
 
 export default  function opinion() {
     const {data: session} = useSession();
+    const {toast} = useToast();
 
     const handleSubmit = async(event:React.FormEvent) => {
         event.preventDefault();
@@ -36,6 +38,7 @@ export default  function opinion() {
         try{
             await addOpinion(data);
             console.log('data added');
+            toast({description: "Post is created."})
         }catch(e){
             console.log('something went wrong', e);
         }
