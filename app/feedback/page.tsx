@@ -4,7 +4,12 @@ import { getServerSession } from "next-auth";
 
 export default async function feedbackServer() {
     const session = await getServerSession();
-    const data = await getPost();
+    let data;
+    if (session && session.user) {
+        data = await getPost(true);
+    }else{
+        data = await getPost(false);
+    }
 
     return (
         <>

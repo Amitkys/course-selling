@@ -92,7 +92,6 @@ export default  function CardWithForm({posts, session}: any) {
                     </Card>
                 ))}
             </div>  
-
         </div>
     )
 }

@@ -35,35 +35,71 @@ export async function addNewStudent(data: addNewStudentType ) {
 }
 
 // getting all feedback
-export async function getPost() {
-    // const session = await getServerSession(authOptions);
-    // if (!session || !session.user) {
-    //     throw new Error("User not authenticated");
-    // }
+export async function getPost(isSessionAvaliable: boolean) {
+    let data;
+    if (isSessionAvaliable) {
+        const session = await getServerSession(authOptions);
+        if (!session || !session.user) {
+            throw new Error("User not authenticated");
+        }
 
-    // const currentUserId = session.user.id;
-    // Fetch all opinions with author and reactions
-    const data = await prisma.opinion.findMany({
-        orderBy: {
-            createdAt: 'desc',
-        },
-        include: {
-            author: {
-                select: {
-                    name: true, // Include author's name
-                    email: true, // Include author's email (KYS)
+        const currentUserId = session.user.id;
+        // Fetch all opinions with author and reactions
+        data = await prisma.opinion.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
+            include: {
+                author: {
+                    select: {
+                        name: true, // Include author's name
+                        email: true, // Include author's email (KYS)
+                    },
+                },
+                reactions: {
+                    where: { userId: currentUserId }, // Fetch reactions specific to the current user
+                    select: {
+                        likeStatus: true,
+                        dislikeStatus: true,
+                    },
                 },
             },
-            // reactions: {
-            //     where: { userId: currentUserId }, // Fetch reactions specific to the current user
-            //     select: {
-            //         likeStatus: true,
-            //         dislikeStatus: true,
-            //     },
-            // },
-        },
-    });
+        });
 
+        // Add rollNumber by joining with EmailWithRoll model
+    const postsWithRollNumbers = await Promise.all(
+        data.map(async (post) => {
+            const emailWithRoll = await prisma.emailWithRoll.findUnique({
+                where: { email: post.author.email }, // Match on email
+                select: { rollNumber: true }, // Get the rollNumber
+            });
+
+            return {
+                ...post,
+                rollNumber: emailWithRoll?.rollNumber || "Unknown", // Include rollNumber or default value
+                likeStatus: post.reactions[0]?.likeStatus || false, // Extract likeStatus from reactions
+                dislikeStatus: post.reactions[0]?.dislikeStatus || false, // Extract dislikeStatus from reactions
+            };
+        })
+    );
+
+    return postsWithRollNumbers;
+
+    } else {
+        data = await prisma.opinion.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
+            include: {
+                author: {
+                    select: {
+                        name: true, // Include author's name
+                        email: true, // Include author's email (KYS)
+                    },
+                },
+            },
+        });
+    }
     // Add rollNumber by joining with EmailWithRoll model
     const postsWithRollNumbers = await Promise.all(
         data.map(async (post) => {
