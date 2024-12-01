@@ -16,6 +16,7 @@ export default async function feedbackServer() {
 
     return (
         <>
+            {/* passed data and user session to component */}
             <CardWithForm posts={data} session = {session} />
         </>
     )
