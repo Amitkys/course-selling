@@ -1,9 +1,6 @@
 
 "use client";
 import * as React from "react"
-import { useState } from "react";
-
-import { Button } from "@/components/ui/button"
 import {
     Card,
     CardContent,
@@ -12,16 +9,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'; // material ui/icon
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 // when user click on like button, then ThumbUp component should be appear
@@ -30,10 +17,13 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // server action function
 import  {handleDislike, handleLike} from "@/lib/action";
+
 import { useToast } from "@/hooks/use-toast";
 
 export default  function CardWithForm({posts, session}: any) {
+    
     const {toast} = useToast();
+
     return (
         <div>
             <h3>Students  Feedback</h3>
