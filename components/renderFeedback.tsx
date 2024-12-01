@@ -51,12 +51,15 @@ export default  function CardWithForm({posts, session}: any) {
                             <br />
                         </CardContent>
                         
-
+                        {/* button for Like and DisLike */}
                         <CardFooter className="flex justify-around">
-                            {/*button 1 */}
+
+                            {/* Like button */}
                             <div className="flex flex-col justify-center">
+                                {/* if user logged in, enable Like feature*/}
                                 {session && session.user ?
-                                    <button onClick={async () => await handleLike(post.id)}>
+                                    <button onClick={async () => await handleLike(post.id)}>  {/* handleLike is server action function*/}
+                                        {/* if they Liked: show filled icon else outline icon */}
                                         <div>
                                             {(post.likeStatus) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
                                         </div>
