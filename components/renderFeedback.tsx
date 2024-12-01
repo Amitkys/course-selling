@@ -31,6 +31,7 @@ export default  function CardWithForm({posts, session}: any) {
                 {posts.map((post: any) => ( // getting 'posts' from component props
                     <Card key={post.id} className="w-[350px]">
 
+                    {/* info about: user and teacher */}
                         <CardHeader>
                             <div className="flex justify-between mb-2" >
                             {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
