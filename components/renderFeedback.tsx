@@ -60,7 +60,7 @@ export default  function CardWithForm({posts, session}: any) {
                             <CardHeader>
                                 <div className="flex justify-between mb-2" >
                                     {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
-                                    <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
+                                    <CardTitle className="text-sm font-normal text-zinc-400" >{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
                                     <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />
@@ -86,7 +86,7 @@ export default  function CardWithForm({posts, session}: any) {
                                         <button onClick={async () => await handleLike(post.id)}>  {/* handleLike is server action function*/}
                                             {/* if they Liked: show filled icon else outline icon */}
                                             <div>
-                                                {(post.likeStatus) ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
+                                                {(post.likeStatus) ? <ThumbUpIcon className="text-green-700" /> : <ThumbUpOutlinedIcon />}
                                             </div>
                                         </button>
                                         // if user is not logged in, simply thow them a outline icon
@@ -98,7 +98,7 @@ export default  function CardWithForm({posts, session}: any) {
                                         </button>
                                     }
                                     {/* always show like count */}
-                                    <div className="ml-1">{post.likeCount}</div>
+                                    <div className="ml-1 text-zinc-400">{post.likeCount}</div>
                                 </div>
 
                                 {/* Dislike Button */}
@@ -107,19 +107,19 @@ export default  function CardWithForm({posts, session}: any) {
                                     {session && session.user ?
                                         <button onClick={async () => await handleDislike(post.id)}> {/* handleDislike is a server function */}
                                             <div className="flex flex-col justify-center">
-                                                {(post.dislikeStatus) ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon />}
+                                                {(post.dislikeStatus) ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon className="text-zinc-400"/>}
                                             </div>
                                         </button>
                                         // if user is not logged in
                                         :
                                         <button onClick={() => toast({ title: 'Login to React' })}>
                                             <div>
-                                                <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
+                                                <ThumbUpOutlinedIcon className="text-zinc-400"></ThumbUpOutlinedIcon>
                                             </div>
                                         </button>
                                     }
                                     {/* dislike count */}
-                                    <div className="ml-1">{post.dislikeCount}</div>
+                                    <div className="ml-1 text-zinc-400">{post.dislikeCount}</div>
                                 </div>
                             </CardFooter>
                         </Card>
