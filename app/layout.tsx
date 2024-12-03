@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
-import { Poppins } from '@next/font/google';
+import { Poppins } from 'next/font/google';
 import "./globals.css";
 import SessionWrapper from "@/app/Components/SessionWrapper";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -40,7 +40,7 @@ export default function RootLayout({
     <SessionWrapper>
       <html lang="en">
         <body
-          className={`${poppins.variable}  antialiased`}
+          className={`${poppins.className}  antialiased`}
         >
           <ThemeProvider
             attribute="class"
