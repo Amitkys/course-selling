@@ -86,14 +86,14 @@ export default  function CardWithForm({posts, session}: any) {
                                         <button onClick={async () => await handleLike(post.id)}>  {/* handleLike is server action function*/}
                                             {/* if they Liked: show filled icon else outline icon */}
                                             <div>
-                                                {(post.likeStatus) ? <ThumbUpIcon className="text-green-700" /> : <ThumbUpOutlinedIcon />}
+                                                {(post.likeStatus) ? <ThumbUpIcon className="text-green-700" /> : <ThumbUpOutlinedIcon className="text-zinc-400"/>}
                                             </div>
                                         </button>
                                         // if user is not logged in, simply thow them a outline icon
                                         :
                                         <button onClick={() => toast({ title: 'Login to React', variant: 'kys' })}>
                                             <div>
-                                                <ThumbUpOutlinedIcon></ThumbUpOutlinedIcon>
+                                                <ThumbUpOutlinedIcon className="text-zinc-400"></ThumbUpOutlinedIcon>
                                             </div>
                                         </button>
                                     }
@@ -107,7 +107,7 @@ export default  function CardWithForm({posts, session}: any) {
                                     {session && session.user ?
                                         <button onClick={async () => await handleDislike(post.id)}> {/* handleDislike is a server function */}
                                             <div className="flex flex-col justify-center">
-                                                {(post.dislikeStatus) ? <ThumbDownIcon /> : <ThumbDownOutlinedIcon className="text-zinc-400"/>}
+                                                {(post.dislikeStatus) ? <ThumbDownIcon className="text-red-700" /> : <ThumbDownOutlinedIcon className="text-zinc-400"/>}
                                             </div>
                                         </button>
                                         // if user is not logged in
