@@ -13,14 +13,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+// learning: whatever is primary table, it will store array of child table
+
+
+model EmailWithRoll{
+  email String  @unique
+  rollNumber String 
+  users User[]
+}
 
 model User {
   id         String    @id @default(uuid()) @db.Uuid
-  email      String    @unique
+  email      String    @unique // Ensures email is unique for the relation
   name       String
   avatar     String
   isAdmin    Boolean   @default(false)       
   isSuperAdmin Boolean @default(false)
+  emailWithRoll EmailWithRoll @relation(fields: [email], references: [email])
   opinions   Opinion[] 
   reactions  Reaction[] 
 }
@@ -50,10 +59,6 @@ model Reaction {
   createdAt  DateTime  @default(now())
 // prevent the user for doing multple like and dislke on same Opinion(post) 
   @@unique([opinionId, userId]) 
-}
-model EmailWithRoll{
-  email String  @unique
-  rollNumber String 
 }
 
 enum ReactionType {
