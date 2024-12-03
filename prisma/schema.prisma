@@ -60,10 +60,6 @@ enum ReactionType {
   DISLIKE
 }
 
-enum RoleType{
-  USER
-  ADMIN
-}
 enum TeacherName{
   AMIT
   RAHUL
