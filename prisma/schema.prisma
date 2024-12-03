@@ -19,6 +19,7 @@ datasource db {
 model EmailWithRoll{
   email String  @unique
   rollNumber String @unique
+  @@unique([email, rollNumber])
   users User[]
 }
 
