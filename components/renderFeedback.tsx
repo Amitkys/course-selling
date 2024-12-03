@@ -21,7 +21,7 @@ import  {handleDislike, handleLike} from "@/lib/action";
 import * as React from "react"
 import { useToast } from "@/hooks/use-toast";
 
-
+// format date and time
 function formatDateTime(dateString: string): string {
     const date = new Date(dateString);
 
@@ -34,10 +34,10 @@ function formatDateTime(dateString: string): string {
     const time = new Intl.DateTimeFormat('en-US', options).format(date);
 
     const day = date.getDate();
-    const month = date.toLocaleString('en-US', { month: 'short' }).toLowerCase(); // Abbreviated month
+    const month = date.toLocaleString('en-US', { month: 'short' }) // Abbreviated month
     const year = date.getFullYear().toString().slice(-2); // Last two digits of the year
 
-    return `${time} . ${day}${month}-${year}`;
+    return `${time} • ${day} ${month}, ${year}`;
 }
 
 
@@ -59,7 +59,7 @@ export default  function CardWithForm({posts, session}: any) {
                                 <div className="flex justify-between mb-2" >
                                     {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
                                     <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
-                                    <CardTitle className="">{formatDateTime(post.createdAt)}</CardTitle>
+                                    <CardTitle className="text-zinc-400 text-xs">{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />
                                 <div className="flex justify-center">
