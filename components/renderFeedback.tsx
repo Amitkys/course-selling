@@ -22,6 +22,26 @@ import * as React from "react"
 import { useToast } from "@/hooks/use-toast";
 
 
+function formatDateTime(dateString: string): string {
+    const date = new Date(dateString);
+
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+        throw new Error("Invalid date string");
+    }
+
+    const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: true }; // Format for time
+    const time = new Intl.DateTimeFormat('en-US', options).format(date);
+
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'short' }).toLowerCase(); // Abbreviated month
+    const year = date.getFullYear().toString().slice(-2); // Last two digits of the year
+
+    return `${time} . ${day}${month}-${year}`;
+}
+
+
+
 export default  function CardWithForm({posts, session}: any) {
     
     const {toast} = useToast();
@@ -39,7 +59,7 @@ export default  function CardWithForm({posts, session}: any) {
                                 <div className="flex justify-between mb-2" >
                                     {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
                                     <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
-                                    <CardTitle>3m ago</CardTitle>
+                                    <CardTitle className="">{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />
                                 <div className="flex justify-center">
