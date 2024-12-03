@@ -40,7 +40,7 @@ export default function RootLayout({
     <SessionWrapper>
       <html lang="en">
         <body
-          className={`${poppins.className}  antialiased`}
+          // className={`${poppins.className}  antialiased`}
         >
           <ThemeProvider
             attribute="class"

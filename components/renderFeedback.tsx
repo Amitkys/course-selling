@@ -20,6 +20,8 @@ import  {handleDislike, handleLike} from "@/lib/action";
 // import utility
 import * as React from "react"
 import { useToast } from "@/hooks/use-toast";
+import { poppin } from "@/components/fonts";
+import { inter } from "@/components/fonts";
 
 // format date and time
 function formatDateTime(dateString: string): string {
@@ -59,7 +61,7 @@ export default  function CardWithForm({posts, session}: any) {
                                 <div className="flex justify-between mb-2" >
                                     {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
                                     <CardTitle>{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
-                                    <CardTitle className="text-zinc-400 text-xs">{formatDateTime(post.createdAt)}</CardTitle>
+                                    <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />
                                 <div className="flex justify-center">
@@ -70,7 +72,7 @@ export default  function CardWithForm({posts, session}: any) {
 
                             {/* student feedback*/}
                             <CardContent className="flex justify-center mb-5">
-                                <CardDescription>{post.statement}</CardDescription>
+                                <CardDescription className={`${poppin.className } antialiased `} >{post.statement}</CardDescription>
                                 <br />
                             </CardContent>
 
