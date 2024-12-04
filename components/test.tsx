@@ -1,8 +1,9 @@
-export  function Test() {
-    return (
-        <div>
+"use client"
+import { useFormStatus } from "react-dom";
 
-            <h1>Testing exports and imports</h1>
-        </div>
+export function Button() {
+    const { pending } = useFormStatus();
+    return (
+        <button type="submit" disabled={pending}>{pending ? "Adding..." : "Add"}</button>
     )
 }

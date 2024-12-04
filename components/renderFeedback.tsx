@@ -15,7 +15,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 // server action function
-import  {handleDislike, handleLike} from "@/lib/action";
+import  {handleDislike, handleLike} from "@/lib/actions/action";
 
 // import utility
 import * as React from "react"

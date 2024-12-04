@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { addOpinion } from "@/lib/action";
+import { addOpinion } from "@/lib/actions/action";
 import { Opinion } from "@/lib/types";
 import { TeacherName } from "@prisma/client";
 import { Input } from "@/components/ui/input";

@@ -1,33 +1,28 @@
-"use client";     
+// "use client";     
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { addNewStudentType } from "@/lib/types"
+import { addUser } from "@/lib/actions/user";
 import React from "react"
-import { FormDescription } from "@/components/ui/form";
 
-export default function AddUser() {
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-
-        const formData = new FormData(event.target as HTMLFormElement);
-
-        const data: addNewStudentType = {
-            email: formData.get('email') as string,
-            rollNumber: formData.get('rollNumber') as string
-        }
-        console.log(data);
-
+export default function PageAddUser() {
+    async function handleForm(formData: FormData) {
+        "use server";
+        
+        const response = await addUser(formData);
     }
   return (
       <div className="grid w-full max-w-sm items-center gap-1.5 ml-3">
-          <form action="" onSubmit={handleSubmit}>
+          <form action={handleForm} >
               <Label htmlFor="roll">Roll</Label>
               <Input className="mb-2" type="number" id="roll" name="rollNumber"></Input>
               <Label htmlFor="email">Email</Label>
               <Input className="mb-2" type="email" id="email" placeholder="Email" name="email" />
+              <p className="mt-2 text-sm text-destructive" role="alert" aria-live="polite">
+                  Email is invalidV
+              </p>
               {/* <FormDescription>Hello bhai</FormDescription> */}
-              <Button  type="submit">Add new student</Button>
+              <Button type="submit">Add new kkkkkstudent</Button>
           </form>
       </div>
   )
