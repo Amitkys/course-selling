@@ -1,7 +1,8 @@
-export default function PageUsers(){
+import { getAllUsers } from "@/lib/actions/user"
+
+export default async function PageUsers(){
+    const data = await getAllUsers();
     return (
-        <div>
-            <h1>All users</h1>
-        </div>
+        
     )
 }
