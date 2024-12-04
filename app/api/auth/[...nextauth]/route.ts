@@ -1,7 +1,6 @@
 import prisma from "@/lib/db";
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { RoleType } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -22,7 +21,6 @@ export const authOptions: AuthOptions = {
             name: user.name || "",
             email: user.email || "",
             avatar: user.image || "",
-            role: RoleType.USER,
           },
         });
       }

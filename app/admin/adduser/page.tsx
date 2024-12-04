@@ -26,7 +26,7 @@ export default function PageAddUser() {
     }
   return (
       <div className="grid w-full max-w-sm items-center gap-1.5 ml-3">
-          <form action={handleForm} >
+          <form action={handleForm}  method="POST">
               <Label htmlFor="roll">Roll</Label>
               <Input className="mb-2" type="number" id="roll" name="rollNumber"></Input>
               <p className=" mb-2 text-sm text-destructive" role="alert" aria-live="polite">
