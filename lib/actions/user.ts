@@ -57,3 +57,9 @@ export async function addUser(formData: FormData){
 
 
 }
+
+export async function getAllUsers(){
+    const data = prisma.user.findMany({
+        where:{isSuperAdmin: false} //exclude super admin
+    })
+}
