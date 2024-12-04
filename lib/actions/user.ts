@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
 import { z } from 'zod';
 
 const addUserSchema = z.object({
@@ -44,6 +45,7 @@ export async function addUser(formData: FormData){
                 email,
             },
         });
+        revalidatePath('/adduser');
         return {success: true, message: 'New user added.'};
     }catch(e){
         return {

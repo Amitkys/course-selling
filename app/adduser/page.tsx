@@ -8,24 +8,34 @@ import React, { useState } from "react"
 
 export default function PageAddUser() {
     const {toast} = useToast();
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [rollError, setRollError] = useState<string | null>(null);
+    const [emailError, setEmailError] = useState<string | null>(null);
     async function handleForm(formData: FormData) {
         // "use server";
+        setRollError(null);
+        setEmailError(null);
 
         const response = await addUser(formData);
-       if(response.rollError) setErrorMessage(response.message);
-       if(!response.success) toast({description: response.message});
-       if(response.success) toast({description: response.message});
+        if (response.rollError) {
+            setRollError(response.message);
+        } else if (response.emailError) {
+            setEmailError(response.message);
+        } else {
+            toast({ description: response.message });
+        }
     }
   return (
       <div className="grid w-full max-w-sm items-center gap-1.5 ml-3">
           <form action={handleForm} >
               <Label htmlFor="roll">Roll</Label>
               <Input className="mb-2" type="number" id="roll" name="rollNumber"></Input>
+              <p className=" mb-2 text-sm text-destructive" role="alert" aria-live="polite">
+                  {rollError}
+              </p>
               <Label htmlFor="text">Email</Label>
               <Input className="mb-2" type="email" id="email" placeholder="Email" name="email" />
               <p className=" mb-2 text-sm text-destructive" role="alert" aria-live="polite">
-                {errorMessage}
+                  {emailError}
               </p>
               <Button type="submit">Add new student</Button>
           </form>
