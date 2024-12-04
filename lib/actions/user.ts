@@ -45,7 +45,7 @@ export async function addUser(formData: FormData){
                 email,
             },
         });
-        revalidatePath('/adduser');
+        revalidatePath('/admin/adduser');
         return {success: true, message: 'New user added.'};
     }catch(e){
         return {
@@ -62,4 +62,6 @@ export async function getAllUsers(){
     const data = prisma.user.findMany({
         where:{isSuperAdmin: false} //exclude super admin
     })
+    revalidatePath('/admin/users');
+    
 }
