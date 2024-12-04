@@ -14,7 +14,8 @@ export default function PageAddUser() {
 
         const response = await addUser(formData);
        if(response.rollError) setErrorMessage(response.message);
-       if(!response.message) toast({description: response.message});
+       if(!response.success) toast({description: response.message});
+       if(response.success) toast({description: response.message});
     }
   return (
       <div className="grid w-full max-w-sm items-center gap-1.5 ml-3">
@@ -23,10 +24,10 @@ export default function PageAddUser() {
               <Input className="mb-2" type="number" id="roll" name="rollNumber"></Input>
               <Label htmlFor="text">Email</Label>
               <Input className="mb-2" type="email" id="email" placeholder="Email" name="email" />
-              <p className="mt-2 text-sm text-destructive" role="alert" aria-live="polite">
+              <p className=" mb-2 text-sm text-destructive" role="alert" aria-live="polite">
                 {errorMessage}
               </p>
-              <Button type="submit">Add new kkkkkstudent</Button>
+              <Button type="submit">Add new student</Button>
           </form>
       </div>
   )

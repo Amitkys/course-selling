@@ -4,7 +4,7 @@ import prisma from "@/lib/db";
 import { z } from 'zod';
 
 const addUserSchema = z.object({
-    rollNumber: z.string(),
+    rollNumber: z.string().max(3),
     email: z.string().email({message: 'email is not valid'}),
 })
 
@@ -23,12 +23,19 @@ export async function addUser(formData: FormData){
     const {rollNumber, email} = verifiedData.data;
 
     try{
-        const isAlreadyExist = await prisma.emailWithRoll.findUnique({
+        const isEmailExist = await prisma.emailWithRoll.findUnique({
+            where: {email}
+        })
+        if (isEmailExist) {
+            return { emailError: true, message: 'Email already exist' }
+        }
+
+        const isRollExist = await prisma.emailWithRoll.findUnique({
             where: {rollNumber},
         });
 
-        if(isAlreadyExist){
-            return {rollError: true, message: `${rollNumber} is Associated with ${isAlreadyExist.email}`}
+        if(isRollExist){
+            return {rollError: true, message: `Roll number already exist`}
         }
 
         await prisma.emailWithRoll.create({
