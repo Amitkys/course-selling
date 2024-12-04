@@ -63,5 +63,6 @@ export async function getAllUsers(){
         where:{isSuperAdmin: false} //exclude super admin
     })
     revalidatePath('/admin/users');
+    return data;
     
 }
