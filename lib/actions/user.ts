@@ -16,7 +16,7 @@ export async function addUser(formData: FormData){
     })
 
     if(!verifiedData.success){
-        const error = verifiedData.error.format();
+        // const error = verifiedData.error.format();
         // console.log(error.email?._errors[0]);
         return { success: false,  message: 'Invalid Data was sent'};
     }
