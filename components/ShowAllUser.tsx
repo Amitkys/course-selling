@@ -1,12 +1,6 @@
-interface IuserTypes {
-    name: string;
-    email: string;
-    id: string;
-    avatar: string;
-    isAdmin: boolean;
-    isSuperAdmin: boolean;
-}
-export default function ShowAllUser({data }: {data: IuserTypes[]}) {
+import { UserType } from "@/lib/types"
+
+export default function ShowAllUser({data }: {data: UserType[]}) {
 
    return (
     <div>

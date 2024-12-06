@@ -1,5 +1,11 @@
-import NextAuth from "next-auth";
-import { TeacherName } from "@prisma/client";
+import { User, TeacherName } from "@prisma/client";
+
+// type based on model in prisma
+
+export type UserType = User;
+
+
+
 
 // add this code for removing red squally in 'id'
 declare module "next-auth" {
