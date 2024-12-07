@@ -31,6 +31,17 @@ export interface addNewStudentType{
 }
 
 export type OpinionDataTypeForUser = {
+    id: string;
+    teacherId: string;
+    statement: string;
+    createdAt: Date;
+    authorId: string;
+    likeCount: number;
+    dislikeCount: number;
+    reactions: {
+        likeStatus: boolean;
+        dislikeStatus: boolean;
+    }[];
     teacher: {
         name: string;
     };
@@ -39,11 +50,5 @@ export type OpinionDataTypeForUser = {
         name: string;
         avatar: string;
     };
-    id: string;
-    teacherId: string;
-    statement: string;
-    createdAt: Date;
-    authorId: string;
-    likeCount: number;
-    dislikeCount: number;
 };
+

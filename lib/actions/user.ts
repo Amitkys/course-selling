@@ -101,6 +101,13 @@ export async function getAllUserPosts(id: string){
                     name: true
                 },
             },
+            reactions: {
+                where: {userId: id},
+                select: {
+                    likeStatus: true,
+                    dislikeStatus: true,
+                },
+            },
         }
     });
     return data;
