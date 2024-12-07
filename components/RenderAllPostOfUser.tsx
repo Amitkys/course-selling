@@ -56,6 +56,7 @@ function formatNumber(value: number): string {
 
 
 export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]}){
+    console.log(posts);
     return (
         <div className="flex justify-center items-center bg-zinc-900">
             <div className="">
@@ -93,8 +94,7 @@ export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]})
                                         <button onClick={async () => await handleLike(post.id)}>  {/* handleLike is server action function*/}
                                             {/* if they Liked: show filled icon else outline icon */}
                                             <div>
-
-                                                {(post.reactions[0].likeStatus) ? <ThumbUpIcon className="text-green-700" /> : <ThumbUpOutlinedIcon className="text-zinc-400 hover:text-green-700 "/>}
+                                                {(post.reactions?.length > 0 && post.reactions[0]?.likeStatus) ? <ThumbUpIcon className="text-green-700" /> : <ThumbUpOutlinedIcon className="text-zinc-400 hover:text-green-700 "/>}
                                             </div>
                                         </button>
                                     {/* always show like count */}
@@ -106,7 +106,7 @@ export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]})
                                     {/* if user logged in, enable dislike feature */}
                                         <button onClick={async () => await handleDislike(post.id)}> {/* handleDislike is a server function */}
                                             <div className="flex flex-col justify-center">
-                                                {(post.reactions[0].dislikeStatus) ? <ThumbDownIcon className="text-red-700" /> : <ThumbDownOutlinedIcon className="text-zinc-400"/>}
+                                                {(post.reactions?.length > 0 && post.reactions[0]?.dislikeStatus) ? <ThumbDownIcon className="text-red-700" /> : <ThumbDownOutlinedIcon className="text-zinc-400"/>}
                                             </div>
                                         </button>
                                     {/* dislike count */}
