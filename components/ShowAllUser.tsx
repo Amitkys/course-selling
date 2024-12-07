@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { UserType } from "@/lib/types"
 import { makeAdmin, removeAdmin } from "@/lib/actions/user"
 // import { useFormStatus } from "react-dom"
@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function ShowAllUser({data }: {data: UserType[]}) {
 
     const [pending, setPending] = useState(false);
+    
     const handleRemoveAdmin = async (id: string) => {
         setPending(true);
         try{

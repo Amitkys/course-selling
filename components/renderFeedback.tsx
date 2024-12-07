@@ -42,6 +42,18 @@ function formatDateTime(dateString: string): string {
     return `${time} • ${day} ${month}, ${year}`;
 }
 
+function formatNumber(value: number): string {
+    if (value >= 1_000_000_000) {
+        return (value / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "b";
+    } else if (value >= 1_000_000) {
+        return (value / 1_000_000).toFixed(1).replace(/\.0$/, "") + "m";
+    } else if (value >= 1_000) {
+        return (value / 1_000).toFixed(1).replace(/\.0$/, "") + "k";
+    } else {
+        return value.toString();
+    }
+}
+
 
 
 export default  function CardWithForm({posts, session}: any) {
@@ -98,7 +110,7 @@ export default  function CardWithForm({posts, session}: any) {
                                         </button>
                                     }
                                     {/* always show like count */}
-                                    <div className="ml-1 text-zinc-400">{post.likeCount}</div>
+                                    <div className="ml-1 text-zinc-400">{formatNumber(post.likeCount)}</div>
                                 </div>
 
                                 {/* Dislike Button */}
@@ -119,7 +131,7 @@ export default  function CardWithForm({posts, session}: any) {
                                         </button>
                                     }
                                     {/* dislike count */}
-                                    <div className="ml-1 text-zinc-400">{post.dislikeCount}</div>
+                                    <div className="ml-1 text-zinc-400">{formatNumber(post.dislikeCount)}</div>
                                 </div>
                             </CardFooter>
                         </Card>

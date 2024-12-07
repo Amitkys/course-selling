@@ -1,5 +1,5 @@
 import CardWithForm from "@/components/renderFeedback";
-import { getPost, handleDislike, handleLike } from "@/lib/actions/action";
+import { getPost } from "@/lib/actions/action";
 import { getServerSession } from "next-auth";
 
 export default async function feedbackServer() {
