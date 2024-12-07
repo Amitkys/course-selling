@@ -9,6 +9,12 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar" 
+
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'; // material ui/icon
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -66,8 +72,13 @@ export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]})
 
                             {/* info about: user and teacher */}
                             <CardHeader>
-                                <div className="flex justify-between mb-2" >
-                                    <CardTitle className="text-sm font-normal text-zinc-400" ></CardTitle>
+                                <div className="flex items-center justify-between mb-2" >
+                                    <CardTitle  >
+                                        <Avatar>
+                                            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                    </CardTitle>
                                     <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />
