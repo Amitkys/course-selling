@@ -74,9 +74,9 @@ export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]})
                             <CardHeader>
                                 <div className="flex items-center justify-between mb-2" >
                                     <CardTitle  >
-                                        <Avatar>
-                                            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                                            <AvatarFallback>CN</AvatarFallback>
+                                        <Avatar >
+                                            <AvatarImage className="" src={post.author.avatar}  alt="@shadcn" />
+                                            <AvatarFallback>...</AvatarFallback>
                                         </Avatar>
                                     </CardTitle>
                                     <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
