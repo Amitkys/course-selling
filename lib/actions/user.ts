@@ -88,6 +88,20 @@ export async function makeAdmin(id : string ) {
 export async function getAllUserPosts(id: string){
     const data = await prisma.opinion.findMany({
         where: {authorId: id},
+        include: {
+            author: {
+                select: {
+                    name: true,
+                    email: true,
+                    avatar:true
+                },
+            },
+            teacher: {
+                select: {
+                    name: true
+                },
+            },
+        }
     });
     return data;
 }

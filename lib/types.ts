@@ -1,4 +1,4 @@
-import { User, TeacherName, Opinion } from "@prisma/client";
+import { User, Opinion } from "@prisma/client";
 
 // type based on model in prisma
 
@@ -29,3 +29,21 @@ export interface addNewStudentType{
     email: string;
     rollNumber: string;
 }
+
+export type OpinionDataForUser = {
+    teacher: {
+        name: string;
+    };
+    author: {
+        email: string;
+        name: string;
+        avatar: string;
+    };
+    id: string;
+    teacherId: string;
+    statement: string;
+    createdAt: Date;
+    authorId: string;
+    likeCount: number;
+    dislikeCount: number;
+};
