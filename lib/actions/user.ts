@@ -84,3 +84,10 @@ export async function makeAdmin(id : string ) {
     })
     revalidatePath('/admin/users')
 }
+
+export async function getAllUserPosts(id: string){
+    const data = await prisma.opinion.findMany({
+        where: {authorId: id},
+    });
+    return data;
+}
