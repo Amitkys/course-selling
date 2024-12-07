@@ -1,8 +1,9 @@
-import { User, TeacherName } from "@prisma/client";
+import { User, TeacherName, Opinion } from "@prisma/client";
 
 // type based on model in prisma
 
 export type UserType = User;
+export type OpinionType = Opinion;
 
 
 
@@ -19,11 +20,11 @@ declare module "next-auth" {
     }
 }
 
-export interface Opinion{
-    statement: string;
-    teacher: TeacherName;
-    authorId: string;
-}
+// export interface Opinion{
+//     statement: string;
+//     teacher: TeacherName;
+//     authorId: string;
+// }
 export interface addNewStudentType{
     email: string;
     rollNumber: string;

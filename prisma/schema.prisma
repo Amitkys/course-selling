@@ -35,9 +35,19 @@ model User {
   reactions  Reaction[] 
 }
 
+model Teacher {
+  id   String @unique @id @default(uuid()) @db.Uuid
+  name String 
+  email String?
+  branch String?
+  opinions Opinion[]
+}
+
+
 model Opinion {
   id           String    @id @default(uuid()) @db.Uuid
-  teacher      TeacherName 
+  teacher      Teacher   @relation(fields: [teacherId], references: [id])
+  teacherId    String    @db.Uuid
   statement    String
   createdAt    DateTime  @default(now())
   author       User      @relation(fields: [authorId], references: [id])
@@ -65,10 +75,4 @@ model Reaction {
 enum ReactionType {
   LIKE
   DISLIKE
-}
-
-enum TeacherName{
-  AMIT
-  RAHUL
-  KISHOR
 }
