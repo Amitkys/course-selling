@@ -68,28 +68,19 @@ export async function getAllUsers(){
     
 }
 
-export async function makeAdmin(formData: FormData) {
-    const id = formData.get("id") as string;
-    if (!id) throw new Error("ID is required");
-
+export async function removeAdmin(id : string ) {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     await prisma.user.update({
-        where: { id },
-        data: { isAdmin: true },
-    });
-
-    // Revalidate the path to show the updated data
-    revalidatePath("/admin/users");
+        where: {id},
+        data: {isAdmin: false}
+    })
+    revalidatePath('/admin/users')
 }
 
-export async function removeAdmin(formData: FormData) {
-    const id = formData.get("id") as string;
-    if (!id) throw new Error("ID is required");
-
+export async function makeAdmin(id : string ) {
     await prisma.user.update({
-        where: { id },
-        data: { isAdmin: false },
-    });
-
-    // Revalidate the path to show the updated data
-    revalidatePath("/admin/users");
+        where: {id},
+        data: {isAdmin: true}
+    })
+    revalidatePath('/admin/users')
 }
