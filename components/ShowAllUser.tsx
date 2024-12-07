@@ -1,10 +1,27 @@
-"use client";
+// "use client";
 import { UserType } from "@/lib/types"
 import { makeAdmin, removeAdmin } from "@/lib/actions/user"
-import { useFormStatus } from "react-dom";
+import { useState } from "react";
 
 export default function ShowAllUser({data }: {data: UserType[]}) {
-    const { pending } = useFormStatus();
+
+    const [pending, setPending] = useState(false);
+    const handleRemoveAdmin = async (id: string) => {
+        setPending(true);
+        try{
+            await removeAdmin(id);
+        }finally{
+            setPending(false);
+        }
+    }
+    const handleMakeAdmin = async (id: string) => {
+        setPending(true);
+        try{
+            await makeAdmin(id);
+        }finally{
+            setPending(false);
+        }
+    }
    return (
     <div>
         {data.map((user: UserType) => (
@@ -18,14 +35,14 @@ export default function ShowAllUser({data }: {data: UserType[]}) {
                 {user.isAdmin ? (
                     <button
                         disabled={pending}
-                        onClick={async () => await removeAdmin(user.id)}
+                        onClick={async () => await handleRemoveAdmin(user.id)}
                     >
                         {pending ? "processing" : "remove admin"}
                     </button>
                 ) : (
                     <button
                         disabled={pending} 
-                        onClick={async () => await makeAdmin(user.id)}
+                        onClick={async () => await handleMakeAdmin(user.id)}
                     >
                         {pending ? "Processing": "make admin"}
                     </button>
