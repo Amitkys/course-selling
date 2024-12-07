@@ -64,8 +64,10 @@ function formatNumber(value: number): string {
 export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]}){
     console.log(posts);
     return (
+        
         <div className="flex justify-center items-center bg-zinc-900">
-            <div className="">
+            
+            <div> 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 justify-center">
                     {posts.map((post: OpinionDataTypeForUser) => ( // getting 'posts' from component props
                         <Card key={post.id} className="w-[350px] mx-auto ">
