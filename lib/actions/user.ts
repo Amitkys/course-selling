@@ -69,6 +69,7 @@ export async function getAllUsers(){
 }
 
 export async function removeAdmin(id : string ) {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     await prisma.user.update({
         where: {id},
         data: {isAdmin: false}
