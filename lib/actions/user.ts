@@ -3,7 +3,7 @@
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { z } from 'zod';
-import { UserType } from "@/lib/types";
+// import { UserType } from "@/lib/types";
 
 const addUserSchema = z.object({
     rollNumber: z.string().max(3),
