@@ -60,7 +60,6 @@ export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]})
     return (
         <div className="flex justify-center items-center bg-zinc-900">
             <div className="">
-                <h3>Students  Feedback</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 justify-center">
                     {posts.map((post: OpinionDataTypeForUser) => ( // getting 'posts' from component props
                         <Card key={post.id} className="w-[350px] mx-auto ">
@@ -68,13 +67,12 @@ export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]})
                             {/* info about: user and teacher */}
                             <CardHeader>
                                 <div className="flex justify-between mb-2" >
-                                    {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
                                     <CardTitle className="text-sm font-normal text-zinc-400" ></CardTitle>
                                     <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />
                                 <div className="flex justify-center">
-                                    <CardTitle className="text-green-600"></CardTitle>
+                                    <CardTitle className="text-green-600">Teacher: {post.teacher.name}</CardTitle>
                                 </div>
                                 <hr />
                             </CardHeader>

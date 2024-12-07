@@ -7,7 +7,6 @@ export default async function User({ params }: { params: { userId: string } }) {
     const posts = await getAllUserPosts(userId);
     return (
         <div>
-            <div>hello</div>
             <RenderAllPostOfUser posts={posts} />
         </div>
     );
