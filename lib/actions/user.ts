@@ -3,6 +3,7 @@
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { z } from 'zod';
+import { UserType } from "@/lib/types";
 
 const addUserSchema = z.object({
     rollNumber: z.string().max(3),
@@ -65,4 +66,20 @@ export async function getAllUsers(){
     revalidatePath('/admin/users');
     return data;
     
+}
+
+export async function removeAdmin(id : string ) {
+    await prisma.user.update({
+        where: {id},
+        data: {isAdmin: false}
+    })
+    revalidatePath('/admin/users')
+}
+
+export async function makeAdmin(id : string ) {
+    await prisma.user.update({
+        where: {id},
+        data: {isAdmin: true}
+    })
+    revalidatePath('/admin/users')
 }
