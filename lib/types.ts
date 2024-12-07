@@ -30,7 +30,7 @@ export interface addNewStudentType{
     rollNumber: string;
 }
 
-export type OpinionDataForUser = {
+export type OpinionDataTypeForUser = {
     teacher: {
         name: string;
     };
