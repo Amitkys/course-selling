@@ -66,20 +66,20 @@ export type OpinionDataTypeForUser = {
 };
 
 export type MainRenderPageType = {
-    rollNumber: string;
+    id: string; // Unique identifier for the post
+    statement: string; // Feedback or opinion text
+    createdAt: Date; // Timestamp of post creation
+    teacher: string; // Name of the teacher
+    likeCount: number; // Number of likes
+    dislikeCount: number; // Number of dislikes
+    likeStatus?: boolean; // Whether the user liked the post (if session available)
+    dislikeStatus?: boolean; // Whether the user disliked the post (if session available)
+    rollNumber: string; // Roll number of the author (if session available)
     author: {
-        email: string;
-        name: string;
+        name: string; // Author's name
+        email: string; // Author's email
     };
-    id: string;
-    teacherId: string;
-    statement: string;
-    createdAt: Date;
-    authorId: string;
-    likeCount: number;
-    dislikeCount: number;
-    likeStatus: boolean;
-    dislikeStatus: boolean;
-    teacher: string;
-}
+};
+
+
 

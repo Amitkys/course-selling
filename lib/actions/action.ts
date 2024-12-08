@@ -5,6 +5,7 @@ import { addNewStudentType } from "@/lib/types";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
+import { MainRenderPageType, UserSession } from "@/lib/types";
 
 export async function getSessionFromServer(){
     const session = await getServerSession(authOptions);
@@ -45,89 +46,95 @@ export async function addNewStudent(data: addNewStudentType ) {
 }
 
 // getting all feedback
-export async function getPost(isSessionAvaliable: boolean) {
+export async function getPost(isSessionAvailable: boolean): Promise<MainRenderPageType[]> {
     let data;
-    if (isSessionAvaliable) {
-        const session = await getServerSession(authOptions);
+
+    if (isSessionAvailable) {
+        const session = await getServerSession(authOptions) as UserSession;
         if (!session || !session.user) {
             throw new Error("User not authenticated");
         }
 
         const currentUserId = session.user.id;
-        // Fetch all opinions with author and reactions
+
+        // Fetch data for authenticated users
         data = await prisma.opinion.findMany({
-            orderBy: {
-                createdAt: 'desc',
-            },
+            orderBy: { createdAt: 'desc' },
             include: {
                 author: {
                     select: {
-                        name: true, // Include author's name
-                        email: true, // Include author's email (KYS)
+                        name: true,
+                        email: true,
                     },
                 },
                 reactions: {
-                    where: { userId: currentUserId }, // Fetch reactions specific to the current user
+                    where: { userId: currentUserId },
                     select: {
                         likeStatus: true,
                         dislikeStatus: true,
                     },
                 },
-            },
-        });
-
-        // Add rollNumber by joining with EmailWithRoll model
-    const postsWithRollNumbers = await Promise.all(
-        data.map(async (post) => {
-            const emailWithRoll = await prisma.emailWithRoll.findUnique({
-                where: { email: post.author.email }, // Match on email
-                select: { rollNumber: true }, // Get the rollNumber
-            });
-
-            return {
-                ...post,
-                rollNumber: emailWithRoll?.rollNumber || "Unknown", // Include rollNumber or default value
-                likeStatus: post.reactions[0]?.likeStatus || false, // Extract likeStatus from reactions
-                dislikeStatus: post.reactions[0]?.dislikeStatus || false, // Extract dislikeStatus from reactions
-            };
-        })
-    );
-
-    return postsWithRollNumbers;
-
-    } else {
-        data = await prisma.opinion.findMany({
-            orderBy: {
-                createdAt: 'desc',
-            },
-            include: {
-                author: {
+                teacher: { // Ensure the teacher is fetched
                     select: {
-                        name: true, // Include author's name
-                        email: true, // Include author's email (KYS)
+                        name: true,
                     },
                 },
             },
         });
+
+        const postsWithRollNumbers = await Promise.all(
+            data.map(async (post) => {
+                const emailWithRoll = await prisma.emailWithRoll.findUnique({
+                    where: { email: post.author.email },
+                    select: { rollNumber: true },
+                });
+
+                return {
+                    ...post,
+                    rollNumber: emailWithRoll?.rollNumber || "Unknown",
+                    likeStatus: post.reactions[0]?.likeStatus || false,
+                    dislikeStatus: post.reactions[0]?.dislikeStatus || false,
+                    teacher: post.teacher?.name || "Unknown", // Ensure `teacher` is always populated
+                };
+            })
+        );
+
+        return postsWithRollNumbers;
+    } else {
+        data = await prisma.opinion.findMany({
+            orderBy: { createdAt: 'desc' },
+            include: {
+                author: {
+                    select: {
+                        name: true,
+                        email: true,
+                    },
+                },
+                teacher: { // Ensure the teacher is fetched
+                    select: {
+                        name: true,
+                    },
+                },
+            },
+        });
+
+        const postsWithRollNumbers = await Promise.all(
+            data.map(async (post) => {
+                const emailWithRoll = await prisma.emailWithRoll.findUnique({
+                    where: { email: post.author.email },
+                    select: { rollNumber: true },
+                });
+
+                return {
+                    ...post,
+                    rollNumber: emailWithRoll?.rollNumber || "Unknown",
+                    teacher: post.teacher?.name || "Unknown", // Ensure `teacher` is always populated
+                };
+            })
+        );
+
+        return postsWithRollNumbers;
     }
-    // Add rollNumber by joining with EmailWithRoll model
-    const postsWithRollNumbers = await Promise.all(
-        data.map(async (post) => {
-            const emailWithRoll = await prisma.emailWithRoll.findUnique({
-                where: { email: post.author.email }, // Match on email
-                select: { rollNumber: true }, // Get the rollNumber
-            });
-
-            return {
-                ...post,
-                rollNumber: emailWithRoll?.rollNumber || "Unknown", // Include rollNumber or default value
-                // likeStatus: post.reactions[0]?.likeStatus || false, // Extract likeStatus from reactions
-                // dislikeStatus: post.reactions[0]?.dislikeStatus || false, // Extract dislikeStatus from reactions
-            };
-        })
-    );
-
-    return postsWithRollNumbers;
 }
 
 
