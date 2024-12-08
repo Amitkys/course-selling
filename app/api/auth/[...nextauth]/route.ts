@@ -10,6 +10,20 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
+    // async jwt({ token, user }) {
+    //   if (user) {
+    //     const loggedInUser = await prisma.user.findUnique({
+    //       where: { email: user.email || "" },
+    //     });
+
+    //     if (loggedInUser) {
+    //       token.id = loggedInUser.id;
+    //       token.isAdmin = loggedInUser.isAdmin;
+    //       token.isSuperAdmin = loggedInUser.isSuperAdmin;
+    //     }
+    //   }
+    //   return token;
+    // },
     async signIn({ user }) {
       const existingUser = await prisma.user.findUnique({
         where: { email: user.email || "" },
@@ -32,11 +46,14 @@ export const authOptions: AuthOptions = {
         const loggedInUser = await prisma.user.findUnique({
           where: { email: token.email },
         });
-
+// add addtional info from db to session like role, is that admin or not
         if (loggedInUser && session.user) {
           session.user.id = loggedInUser.id;
+          session.user.isAdmin = loggedInUser.isAdmin;
+          session.user.isSuperAdmin = loggedInUser.isSuperAdmin;
         }
       }
+      // console.log(session);
       return session;
     },
     redirect({ url, baseUrl }) {

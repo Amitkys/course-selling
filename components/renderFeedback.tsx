@@ -16,15 +16,16 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 // server action function
 import  {handleDislike, handleLike} from "@/lib/actions/action";
-
+import { UserSession } from "@/lib/types";
 // import utility
 import * as React from "react"
 import { useToast } from "@/hooks/use-toast";
 import { poppin } from "@/components/fonts";
 import { inter } from "@/components/fonts";
+import { MainRenderPageType } from "@/lib/types";
 
 // format date and time
-function formatDateTime(dateString: string): string {
+function formatDateTime(dateString: Date): string {
     const date = new Date(dateString);
 
     // Check if the date is valid
@@ -56,7 +57,15 @@ function formatNumber(value: number): string {
 
 
 
-export default  function CardWithForm({posts, session}: any) {
+export default  function CardWithForm(
+    {
+        posts,
+        session
+    }: {
+        posts: MainRenderPageType[];
+        session: UserSession;
+    }
+) {
     
     const {toast} = useToast();
 
@@ -65,7 +74,7 @@ export default  function CardWithForm({posts, session}: any) {
             <div className="">
                 <h3>Students  Feedback</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 justify-center">
-                    {posts.map((post: any) => ( // getting 'posts' from component props
+                    {posts.map((post: MainRenderPageType) => ( // getting 'posts' from component props
                         <Card key={post.id} className="w-[350px] mx-auto ">
 
                             {/* info about: user and teacher */}

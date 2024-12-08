@@ -28,6 +28,7 @@ import * as React from "react"
 // import { useToast } from "@/hooks/use-toast";
 import { poppin } from "@/components/fonts";
 import { inter } from "@/components/fonts";
+import { useSession } from "next-auth/react";
 
 // format date and time
 function formatDateTime(dateString: Date): string {
@@ -62,7 +63,9 @@ function formatNumber(value: number): string {
 
 
 export  function RenderAllPostOfUser({posts}: {posts: OpinionDataTypeForUser[]}){
-    console.log(posts);
+      const { data: session } = useSession();
+
+  console.log("Session on the client:", session);
     return (
         
         <div className="flex justify-center items-center bg-zinc-900">

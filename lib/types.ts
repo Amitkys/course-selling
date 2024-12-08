@@ -16,8 +16,21 @@ declare module "next-auth" {
             name?: string | null;
             email?: string | null;
             image?: string | null;
+            isAdmin?: boolean | null;
+            isSuperAdmin?: boolean | null;
         };
     }
+}
+
+export type UserSession = {
+    user: {
+        id: string;
+        name?: string | null;
+        email?: string | null;
+        image?: string | null;
+        isAdmin?: boolean | null;
+        isSuperAdmin?: boolean | null;
+    };
 }
 
 // export interface Opinion{
@@ -51,4 +64,22 @@ export type OpinionDataTypeForUser = {
         avatar: string;
     };
 };
+
+export type MainRenderPageType = {
+    rollNumber: string;
+    author: {
+        email: string;
+        name: string;
+    };
+    id: string;
+    teacherId: string;
+    statement: string;
+    createdAt: Date;
+    authorId: string;
+    likeCount: number;
+    dislikeCount: number;
+    likeStatus: boolean;
+    dislikeStatus: boolean;
+    teacher: string;
+}
 
