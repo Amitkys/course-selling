@@ -20,32 +20,12 @@ import { useToast } from "@/hooks/use-toast";
 
 
 export default  function opinion() {
-    const {data: session} = useSession();
-    const {toast} = useToast();
-
-    const handleSubmit = async(event:React.FormEvent) => {
-        event.preventDefault();
-
-        // creating for data object
-        const formData = new FormData(event.target as HTMLFormElement)
-
-        const data: Opinion = {
-            statement: formData.get("statement") as string,
-            teacher: formData.get("teacher") as TeacherName,
-            authorId: session?.user?.id ?? "",
-        }
-
-        try{
-            await addOpinion(data);
-            console.log('data added');
-            toast({description: "Post is created.", variant: "kys"})
-        }catch(e){
-            console.log('something went wrong', e);
-        }
+    const handleForm  = async (formData: FormData) =>{
+        await addOpinion(formData);
     }
     return (
         <div className="flex items-center  h-screen w-full flex-col">
-            <form className="w-full mt-20"  action="" onSubmit={handleSubmit}>
+            <form className="w-full mt-20"  action={handleForm}>
 
                 <Select name="teacher">
                     <SelectTrigger className="w-[180px] text-sm lg:text-lg mb-3 font-bold">

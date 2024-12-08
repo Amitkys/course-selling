@@ -7,6 +7,13 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { MainRenderPageType, UserSession } from "@/lib/types";
 
+import {  z } from "zod";
+
+const OpninonSchema = z.object({
+    teacher: z.string(),
+    statement: z.string(),
+})
+
 export async function getSessionFromServer(): Promise<UserSession> {
     const session = await getServerSession(authOptions);
 
@@ -18,17 +25,25 @@ export async function getSessionFromServer(): Promise<UserSession> {
 
 
 // add feedback
-export async function addOpinion(data: Opinion) {
-    const prismaData = {
-        statement: data.statement,
-        teacher: data.teacher,
-        author: {connect : {id: data.authorId}}, //map relation
-    }
+export async function addOpinion(formData: FormData) {
+    
+     // Extract form data
+    const teacher = formData.get("teacher")?.toString();
+    const statement = formData.get("statement")?.toString();
+    console.log(teacher, statement);
 
-    const res = await prisma.opinion.create({
-        data: prismaData,
-    });
-    console.log(res);
+
+
+    // const prismaData = {
+    //     statement: data.statement,
+    //     teacher: data.teacher,
+    //     author: {connect : {id: data.authorId}}, //map relation
+    // }
+
+    // const res = await prisma.opinion.create({
+    //     data: prismaData,
+    // });
+    // console.log(res);
 }
 
 // add new student with roll number
