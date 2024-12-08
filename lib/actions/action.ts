@@ -72,7 +72,7 @@ export async function addOpinion(formData: FormData) {
 
     revalidatePath("/feedback");
     console.log('data added');
-    redirect("/feedback");
+    // redirect("/feedback");
 
 }
 
