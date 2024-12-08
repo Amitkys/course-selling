@@ -23,15 +23,16 @@ declare module "next-auth" {
 }
 
 export type UserSession = {
-    user: {
+    user?: {
         id: string;
         name?: string | null;
         email?: string | null;
         image?: string | null;
         isAdmin?: boolean | null;
         isSuperAdmin?: boolean | null;
-    };
-}
+    } | null;
+};
+
 
 // export interface Opinion{
 //     statement: string;

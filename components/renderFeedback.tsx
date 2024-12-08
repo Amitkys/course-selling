@@ -93,7 +93,7 @@ export default  function CardWithForm(
 
                             {/* student feedback*/}
                             <CardContent className="flex justify-center mb-5">
-                                <CardDescription className={`${poppin.className } antialiased `} >{post.statement}</CardDescription>
+                                <CardDescription  className={`${poppin.className} antialiased`}>{post.statement}</CardDescription>
                                 <br />
                             </CardContent>
 

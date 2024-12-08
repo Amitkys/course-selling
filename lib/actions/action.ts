@@ -7,12 +7,12 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { MainRenderPageType, UserSession } from "@/lib/types";
 
-export async function getSessionFromServer(){
+export async function getSessionFromServer(): Promise<UserSession> {
     const session = await getServerSession(authOptions);
-        if (!session || !session.user) {
-            throw new Error("User not authenticated");
-        }
-    return session;
+
+    return {
+        user: session?.user || null, // Return the `user` object or `null` if the session doesn't exist
+    };
 }
 
 
