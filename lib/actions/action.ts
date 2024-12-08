@@ -9,10 +9,17 @@ import { MainRenderPageType, UserSession } from "@/lib/types";
 
 import {  z } from "zod";
 
-const OpninonSchema = z.object({
+const OpinionSchema = z.object({
     teacher: z.string(),
     statement: z.string(),
 })
+
+export async function getTeachers() {
+    const teachers = await prisma.teacher.findMany({
+        select: {id: true, name: true},
+    })
+    return teachers;
+}
 
 export async function getSessionFromServer(): Promise<UserSession> {
     const session = await getServerSession(authOptions);
@@ -20,6 +27,7 @@ export async function getSessionFromServer(): Promise<UserSession> {
     return {
         user: session?.user || null, // Return the `user` object or `null` if the session doesn't exist
     };
+    
 }
 
 
@@ -27,23 +35,18 @@ export async function getSessionFromServer(): Promise<UserSession> {
 // add feedback
 export async function addOpinion(formData: FormData) {
     
-     // Extract form data
+    // Extract form data
     const teacher = formData.get("teacher")?.toString();
     const statement = formData.get("statement")?.toString();
-    console.log(teacher, statement);
+
+    // Validate input
+    const validationResult = OpinionSchema.safeParse({ teacher, statement });
+    if (!validationResult.success) {
+        throw new Error(validationResult.error.errors.map(err => err.message).join(", "));
+    }
 
 
 
-    // const prismaData = {
-    //     statement: data.statement,
-    //     teacher: data.teacher,
-    //     author: {connect : {id: data.authorId}}, //map relation
-    // }
-
-    // const res = await prisma.opinion.create({
-    //     data: prismaData,
-    // });
-    // console.log(res);
 }
 
 // add new student with roll number

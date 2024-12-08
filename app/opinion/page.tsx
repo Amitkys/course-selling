@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { addOpinion } from "@/lib/actions/action";
+import { addOpinion, getTeachers } from "@/lib/actions/action";
 import { Opinion } from "@/lib/types";
 import { TeacherName } from "@prisma/client";
 import { Input } from "@/components/ui/input";
@@ -16,10 +16,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useEffect, useState } from "react";
 
 
 
 export default  function opinion() {
+    const [teachers, setTeachers] = useState<{ id: string; name: string }[]>([]);
+
+    useEffect(() => {
+        const fetchTeachers = async () => {
+            const data = await getTeachers();
+            setTeachers(data);
+        };
+        fetchTeachers();
+    }, []);
+    
     const handleForm  = async (formData: FormData) =>{
         await addOpinion(formData);
     }
