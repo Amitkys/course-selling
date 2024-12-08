@@ -30,7 +30,7 @@ export default  function opinion() {
         };
         fetchTeachers();
     }, []);
-    
+
     const handleForm  = async (formData: FormData) =>{
         await addOpinion(formData);
     }
@@ -43,9 +43,15 @@ export default  function opinion() {
                         <SelectValue placeholder="Select Teacher"></SelectValue>
                     </SelectTrigger>
                     <SelectContent >
-                        <SelectItem className="text-sm lg:text-lg font-bold" value="AMIT">Amit</SelectItem>
-                        <SelectItem className="text-sm lg:text-lg font-bold" value="KISHOR">Kishor</SelectItem>
-                        <SelectItem className="text-sm lg:text-lg font-bold" value="ROHAN">Rohan</SelectItem>
+                        {teachers.map((teacher) => (
+                            <SelectItem
+                                key={teacher.id} // Use ID as key
+                                className="text-sm lg:text-lg font-bold"
+                                value={teacher.id} // Send teacher's ID to server on submit
+                            >
+                                {teacher.name} {/* Show name for user */}
+                            </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
                 

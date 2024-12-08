@@ -8,10 +8,11 @@ import { revalidatePath } from "next/cache";
 import { MainRenderPageType, UserSession } from "@/lib/types";
 
 import {  z } from "zod";
+import { redirect } from "next/navigation";
 
 const OpinionSchema = z.object({
-    teacher: z.string(),
-    statement: z.string(),
+    teacherId: z.string().min(1),
+    statement: z.string().min(1),
 })
 
 export async function getTeachers() {
@@ -35,17 +36,43 @@ export async function getSessionFromServer(): Promise<UserSession> {
 // add feedback
 export async function addOpinion(formData: FormData) {
     
-    // Extract form data
-    const teacher = formData.get("teacher")?.toString();
-    const statement = formData.get("statement")?.toString();
+    const validationResult = OpinionSchema.safeParse({
+    teacherId: formData.get("teacher")?.toString(),
+    statement: formData.get("statement")?.toString(),
+  });
 
-    // Validate input
-    const validationResult = OpinionSchema.safeParse({ teacher, statement });
     if (!validationResult.success) {
         throw new Error(validationResult.error.errors.map(err => err.message).join(", "));
     }
 
+    const { teacherId, statement } = validationResult.data;
 
+    const session = await getSessionFromServer();
+    if (!session.user) {
+        throw new Error("You must be logged in to submit feedback.");
+    }
+
+    const userId = session.user.id;
+
+    const teacherRecord = await prisma.teacher.findUnique({
+        where: { id: teacherId },
+    });
+
+    if (!teacherRecord) {
+        throw new Error("The selected teacher is invalid.");
+    }
+
+    await prisma.opinion.create({
+        data: {
+            teacherId,
+            statement,
+            authorId: userId,
+        },
+    });
+
+    revalidatePath("/feedback");
+    console.log('data added');
+    redirect("/feedback");
 
 }
 
