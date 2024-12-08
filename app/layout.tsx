@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
-import { Poppins } from 'next/font/google';
 import "./globals.css";
 import SessionWrapper from "@/app/Components/SessionWrapper";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -18,11 +17,6 @@ import { Toaster } from "@/components/ui/toaster"
 //   weight: "100 900",
 
 // });
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-poppins',
-})
 
 
 
