@@ -15,8 +15,13 @@ const OpinionSchema = z.object({
     statement: z.string().min(1),
 })
 
+export async function getTeacher() {
+    const data = await prisma.teacher.findMany({
+        orderBy: 'descending' 
+    })
+}
 export async function AddTeacher(data: TeacherSchema) {
-     await prisma.teacher.create({
+    await prisma.teacher.create({
         data: data
     });
     console.log('data added');
