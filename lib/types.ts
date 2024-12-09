@@ -7,9 +7,11 @@ export type OpinionType = Opinion;
 
 
 export type TeacherType = {
-    name?: string | null;
-    branch?: string | null;
-    email?: string | null;
+    name: string;
+    email: string | null;
+    branch: string | null;
+    id: string;
+    createdAt: Date;
 }
 
 

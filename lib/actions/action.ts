@@ -1,6 +1,5 @@
 "use server";
 import prisma from "@/lib/db";
-import { Opinion, TeacherType } from "@/lib/types";
 import { addNewStudentType } from "@/lib/types";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
@@ -16,9 +15,13 @@ const OpinionSchema = z.object({
 })
 
 export async function getTeacher() {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await prisma.teacher.findMany({
-        orderBy: 'descending' 
-    })
+        orderBy: {
+            id: 'desc'
+        }
+    });
+    return data;
 }
 export async function AddTeacher(data: TeacherSchema) {
     await prisma.teacher.create({
