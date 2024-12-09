@@ -40,6 +40,7 @@ model Teacher {
   name String 
   email String?
   branch String?
+  createdAt DateTime @default(now())
   opinions Opinion[]
 }
 
