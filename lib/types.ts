@@ -6,6 +6,11 @@ export type UserType = User;
 export type OpinionType = Opinion;
 
 
+export type TeacherType = {
+    name?: string | null;
+    branch?: string | null;
+    email?: string | null;
+}
 
 
 // add this code for removing red squally in 'id'

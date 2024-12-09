@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/lib/db";
-import { Opinion } from "@/lib/types";
+import { Opinion, TeacherType } from "@/lib/types";
 import { addNewStudentType } from "@/lib/types";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
@@ -8,12 +8,20 @@ import { revalidatePath } from "next/cache";
 import { MainRenderPageType, UserSession } from "@/lib/types";
 
 import {  z } from "zod";
-import { redirect } from "next/navigation";
+import { TeacherSchema } from "@/app/addteacher/page";
 
 const OpinionSchema = z.object({
     teacherId: z.string().min(1),
     statement: z.string().min(1),
 })
+
+export async function AddTeacher(data: TeacherSchema) {
+     await prisma.teacher.create({
+        data: data
+    });
+    console.log('data added');
+}
+ 
 
 export async function getTeachers() {
     const teachers = await prisma.teacher.findMany({
