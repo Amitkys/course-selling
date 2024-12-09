@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 
-export default function opinion() {
-    const router = useRouter();
+export default function Opinion() {
+  const router = useRouter();
   const { toast } = useToast();
 
   // State to track teacher data and loading
