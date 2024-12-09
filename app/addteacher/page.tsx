@@ -40,14 +40,6 @@ export default function InputDemo() {
         <Input id="input-name" placeholder="Name" name="name" type="text" required />
       </div>
 
-      <div className="mb-2 flex items-center justify-between gap-1">
-        <Label htmlFor="input-email" className="leading-6">
-          Email
-        </Label>
-        <span className="text-sm text-muted-foreground">Optional</span>
-      </div>
-      <Input id="input-email" placeholder="Email" name="email" type="email" />
-
       <Select name="branch">
         <SelectTrigger className="w-[250px]">
           <SelectValue placeholder="Select Branch" />
@@ -57,6 +49,15 @@ export default function InputDemo() {
           <SelectItem value="MCA">MCA</SelectItem>
         </SelectContent>
       </Select>
+      
+      <div className="mb-2 flex items-center justify-between gap-1">
+        <Label htmlFor="input-email" className="leading-6">
+          Email
+        </Label>
+        <span className="text-sm text-muted-foreground">Optional</span>
+      </div>
+      <Input id="input-email" placeholder="Email" name="email" type="email" />
+
 
       <Button type="submit" className="mt-2">
         Add Teacher
