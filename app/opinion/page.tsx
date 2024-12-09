@@ -1,8 +1,8 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { addOpinion, getTeachers } from "@/lib/actions/action";
-import { toast, useToast } from "@/hooks/use-toast";
+import {  useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import {
   Select,
@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -44,7 +43,7 @@ export default function opinion() {
   const handleForm = async (formData: FormData) => {
     try {
       await addOpinion(formData);
-      toast({ description: "kys" });
+      toast({description: "Opinion added"});
     //   redirect('/feedback');
     router.push("/feedback");
     } catch (e) {
