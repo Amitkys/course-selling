@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Email from "next-auth/providers/email";
 
 export default function InputDemo() {
     const handleForm = async (formData: FormData) => {
@@ -39,16 +38,8 @@ export default function InputDemo() {
               </SelectTrigger>
 
               <SelectContent>
-                  <SelectItem
-                      value="B.Tech"
-                  >
-                      B.Tech
-                  </SelectItem>
-                  <SelectItem
-                      value="MCA"
-                  >
-                      MCA
-                  </SelectItem>
+                  <SelectItem value="B.Tech" >B.Tech</SelectItem>
+                  <SelectItem value="MCA">MCA</SelectItem>
               </SelectContent>
           </Select>
           <Button type="submit" className="mt-2">Add Teacher</Button>
