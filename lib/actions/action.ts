@@ -15,7 +15,7 @@ const OpinionSchema = z.object({
 })
 
 export async function getTeacher() {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = await prisma.teacher.findMany({
         orderBy: {
             id: 'desc'
@@ -108,8 +108,9 @@ export async function addNewStudent(data: addNewStudentType ) {
 
 // getting all feedback
 export async function getPost(isSessionAvailable: boolean): Promise<MainRenderPageType[]> {
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     let data;
-
+// 
     if (isSessionAvailable) {
         const session = await getServerSession(authOptions) as UserSession;
         if (!session || !session.user) {

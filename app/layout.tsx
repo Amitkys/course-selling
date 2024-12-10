@@ -42,7 +42,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           ></ThemeProvider>
-          <main>{children}</main>
+          <main className="grid grid-cols-[1fr_2fr_1fr] h-screen">{children}</main>
           <Toaster  />
         </body>
       </html>
