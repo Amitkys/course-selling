@@ -72,9 +72,9 @@ export default  function CardWithForm(
         <div className="flex justify-center items-center  border rounded border-slate-900] space-y-2">
             <div className={inter.className}>
                 <h3>Students  Feedback</h3>
-                <div className="grid grid-cols-1  justify-center ">
+                <div className="grid grid-cols-1  justify-center space-y-2">
                     {posts.map((post: MainRenderPageType) => ( // getting 'posts' from component props
-                        <Card key={post.id} className="w-[600px] mx-auto ">
+                        <Card key={post.id} className="w-[600px] mx-auto">
 
                             {/* info about: user and teacher */}
                             <CardHeader>

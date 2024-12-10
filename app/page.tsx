@@ -1,5 +1,6 @@
 import { ButtonGroup } from "@/components/ui/buttonGroup"
 import FeedbackServer from "@/app/feedback/page"
+import { Suspense } from "react"
 export default function HomePage() {
   return (
     <>
@@ -9,7 +10,9 @@ export default function HomePage() {
       </div>
 
       <div className="overflow-y-auto scrollbar-hidden ">
-        <FeedbackServer />
+        <Suspense fallback={<div>Loding</div>}>
+          <FeedbackServer />
+        </Suspense>
       </div>
 
       <div>
