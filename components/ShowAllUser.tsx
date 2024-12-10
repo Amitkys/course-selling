@@ -34,7 +34,7 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
               <TableHeader>
                   <TableRow>
                       <TableHead className="w-[100px]">Name</TableHead>
-                      <TableHead>Email</TableHead>
+                      <TableHead>Roll</TableHead>
                       <TableHead className="text-right">Action</TableHead>
                   </TableRow>
               </TableHeader>
