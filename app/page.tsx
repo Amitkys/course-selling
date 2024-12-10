@@ -15,8 +15,9 @@ export default function HomePage() {
         </Suspense>
       </div>
 
-      <div>
-        hello
+      <div className="grid grid-rows-2">
+        <div>1</div>
+        <div className="border-t ">2</div>
       </div>
     </>
   ) 

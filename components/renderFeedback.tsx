@@ -69,7 +69,7 @@ export default  function CardWithForm(
     const {toast} = useToast();
 
     return (
-        <div className="flex justify-center items-center  border rounded border-slate-900] space-y-2">
+        <div className="flex justify-center items-center  border rounded  space-y-2">
             <div className={inter.className}>
                 <h3>Students  Feedback</h3>
                 <div className="grid grid-cols-1  justify-center space-y-2">
