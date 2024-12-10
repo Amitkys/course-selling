@@ -1,6 +1,8 @@
 import { ButtonGroup } from "@/components/ui/buttonGroup"
 import FeedbackServer from "@/app/feedback/page"
 import { Suspense } from "react"
+import PageUsers from "@/app/admin/users/page";
+
 export default function HomePage() {
   return (
     <>
@@ -16,7 +18,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-rows-2">
-        <div>1</div>
+        <PageUsers />
         <div className="border-t ">2</div>
       </div>
     </>

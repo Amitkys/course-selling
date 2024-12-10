@@ -61,7 +61,15 @@ export async function addUser(formData: FormData){
 
 export async function getAllUsers(){
     const data = prisma.user.findMany({
-        where:{isSuperAdmin: false} //exclude super admin
+        where:{isSuperAdmin: false}, //exclude super admin
+        orderBy: {id: 'desc'},
+        include: {
+            emailWithRoll: {
+                select: {
+                    rollNumber: true
+                }
+            }
+        }
     })
     revalidatePath('/admin/users');
     return data;
@@ -69,7 +77,7 @@ export async function getAllUsers(){
 }
 
 export async function removeAdmin(id : string ) {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     await prisma.user.update({
         where: {id},
         data: {isAdmin: false}
