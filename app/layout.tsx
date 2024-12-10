@@ -4,7 +4,7 @@ import "./globals.css";
 import SessionWrapper from "@/app/Components/SessionWrapper";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster"
-
+import {inter} from "@/components/fonts"
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -34,7 +34,7 @@ export default function RootLayout({
     <SessionWrapper>
       <html lang="en">
         <body
-          // className={`${poppins.className}  antialiased`}
+          className={`${inter.className}  antialiased`}
         >
           <ThemeProvider
             attribute="class"

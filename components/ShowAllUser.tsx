@@ -29,44 +29,52 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
   };
 
   return (
-    <div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead className="text-right">Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map((user: UserType) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium">{user.name.split(" ")[0]}</TableCell>
-              <TableCell>{user.emailWithRoll.rollNumber}</TableCell>
-              <TableCell className="text-right">
-                {user.isAdmin ? (
-                  <Button
-                  className="px-4 py-2 min-w-[140px]"
-                    disabled={pending[user.id]}
-                    onClick={() => handleAction(user.id, "remove")}
-                  >
-                    {pending[user.id] ? "Processing..." : "Remove Admin"}
-                  </Button>
-                ) : (
-                  <Button
-                  className="px-4 py-2 min-w-[140px]"
-                    disabled={pending[user.id]}
-                    onClick={() => handleAction(user.id, "make")}
-                  >
-                    {pending[user.id] ? "Processing..." : "Make Admin"}
-                  </Button>
-                )}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+      <div>
+          <Table>
+              <TableHeader>
+                  <TableRow>
+                      <TableHead className="w-[100px]">Name</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead className="text-right">Action</TableHead>
+                  </TableRow>
+              </TableHeader>
+              <TableBody>
+                  {data.map((user: UserType) => (
+                      <TableRow key={user.id}>
+                          <TableCell className="font-medium">{user.name.split(" ")[0]}</TableCell>
+                          <TableCell>{user.emailWithRoll.rollNumber ? user.emailWithRoll.rollNumber : '...'}</TableCell>
+                          <TableCell className="text-right">
+                              {user.isSuperAdmin ? (
+                                  // SuperAdmin case: Show disabled button
+                                  <Button className="px-4 py-2 min-w-[140px]" disabled>
+                                      Remove Admin
+                                  </Button>
+                              ) : user.isAdmin ? (
+                                  // Admin case: Show button with action for "Remove Admin"
+                                  <Button
+                                      className="px-4 py-2 min-w-[140px]"
+                                      disabled={pending[user.id]}
+                                      onClick={() => handleAction(user.id, "remove")}
+                                  >
+                                      {pending[user.id] ? "Processing..." : "Remove Admin"}
+                                  </Button>
+                              ) : (
+                                  // Non-admin case: Show button for "Make Admin"
+                                  <Button
+                                      className="px-4 py-2 min-w-[140px]"
+                                      disabled={pending[user.id]}
+                                      onClick={() => handleAction(user.id, "make")}
+                                  >
+                                      {pending[user.id] ? "Processing..." : "Make Admin"}
+                                  </Button>
+                              )}
+                          </TableCell>
+
+                      </TableRow>
+                  ))}
+              </TableBody>
+          </Table>
+      </div>
   );
 }
 
