@@ -8,7 +8,7 @@ export default function HomePage() {
         <ButtonGroup />
       </div>
 
-      <div>
+      <div >
         <FeedbackServer />
       </div>
 
