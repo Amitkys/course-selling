@@ -153,7 +153,7 @@ export async function getPost(isSessionAvailable: boolean): Promise<MainRenderPa
 
                 return {
                     ...post,
-                    rollNumber: emailWithRoll?.rollNumber || "Unknown",
+                    rollNumber: emailWithRoll?.rollNumber ?? null,
                     likeStatus: post.reactions[0]?.likeStatus || false,
                     dislikeStatus: post.reactions[0]?.dislikeStatus || false,
                     teacher: post.teacher?.name || "Unknown", // Ensure `teacher` is always populated
@@ -189,7 +189,7 @@ export async function getPost(isSessionAvailable: boolean): Promise<MainRenderPa
 
                 return {
                     ...post,
-                    rollNumber: emailWithRoll?.rollNumber || "Unknown",
+                    rollNumber: emailWithRoll?.rollNumber ?? null,
                     teacher: post.teacher?.name || "Unknown", // Ensure `teacher` is always populated
                 };
             })

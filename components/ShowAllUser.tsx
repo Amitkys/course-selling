@@ -42,7 +42,7 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
           {data.map((user: UserType) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.emailWithRoll.rollNumber}</TableCell>
               <TableCell className="text-right">
                 {user.isAdmin ? (
                   <Button

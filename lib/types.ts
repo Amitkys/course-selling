@@ -1,8 +1,19 @@
-import { User, Opinion } from "@prisma/client";
+import {  Opinion } from "@prisma/client";
 
 // type based on model in prisma
 
-export type UserType = User;
+export type UserType = {
+     emailWithRoll: {
+        rollNumber: string | null;
+    };
+} & {
+    name: string;
+    id: string;
+    email: string;
+    avatar: string;
+    isAdmin: boolean;
+    isSuperAdmin: boolean;
+}
 export type OpinionType = Opinion;
 
 
@@ -82,7 +93,7 @@ export type MainRenderPageType = {
     dislikeCount: number; // Number of dislikes
     likeStatus?: boolean; // Whether the user liked the post (if session available)
     dislikeStatus?: boolean; // Whether the user disliked the post (if session available)
-    rollNumber: string; // Roll number of the author (if session available)
+    rollNumber: string | null | undefined; // Roll number of the author (if session available)
     author: {
         name: string; // Author's name
         email: string; // Author's email
