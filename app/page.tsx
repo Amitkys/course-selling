@@ -1,12 +1,13 @@
+import { ButtonGroup } from "@/components/ui/buttonGroup"
 export default function HomePage() {
   return (
     <>
       <div>
-          hello
+        <ButtonGroup />
       </div>
 
       <div>
-          hello
+        hello
       </div>
 
       <div>
