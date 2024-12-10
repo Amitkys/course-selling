@@ -2,7 +2,7 @@ import CardWithForm from "@/components/renderFeedback";
 import { getPost, getSessionFromServer } from "@/lib/actions/action";
 import { MainRenderPageType, UserSession } from "@/lib/types";
 
-export default async function feedbackServer() {
+export default async function FeedbackServer() {
     // Fetch the logged-in user's session
     const session: UserSession = await getSessionFromServer();
 
