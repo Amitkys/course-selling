@@ -8,7 +8,7 @@ export default function HomePage() {
         <ButtonGroup />
       </div>
 
-      <div >
+      <div className="overflow-y-auto scrollbar-hidden ">
         <FeedbackServer />
       </div>
 

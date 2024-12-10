@@ -70,7 +70,7 @@ export default  function CardWithForm(
 
     return (
         <div className="flex justify-center items-center  border rounded border-slate-900] space-y-2">
-            <div className="">
+            <div className={inter.className}>
                 <h3>Students  Feedback</h3>
                 <div className="grid grid-cols-1  justify-center ">
                     {posts.map((post: MainRenderPageType) => ( // getting 'posts' from component props
