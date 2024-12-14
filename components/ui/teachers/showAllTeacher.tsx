@@ -9,7 +9,7 @@ export default function ShowAllTeacher({ teachers }: { teachers: TeacherType[] }
 
     return (
         <div>
-            <h1 className="text-lg font-bold mb-4">All Teachers</h1>
+            <h1 className="text-lg font-bold mb-4 ml-2">All Teachers</h1>
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -24,8 +24,8 @@ export default function ShowAllTeacher({ teachers }: { teachers: TeacherType[] }
                             <TableRow key={teacher.id}>
                                 <TableCell className="font-medium">{teacher.name.split(" ")[0]}</TableCell>
                                 <TableCell>{teacher.branch ? teacher.branch : 'not given'}</TableCell>
-                                <TableCell>
-                                    <Button onClick={async () => await deleteTeacher(teacher.id)}>Remove</Button>
+                                <TableCell className="text-right">
+                                    <Button className="min-w-[140px]" onClick={async () => await deleteTeacher(teacher.id)}>Remove</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

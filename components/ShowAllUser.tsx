@@ -30,6 +30,7 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
 
   return (
       <div>
+          <h1 className="text-lg font-bold mb-4 ml-2">Registered users</h1>
           <Table>
               <TableHeader>
                   <TableRow>
@@ -52,7 +53,7 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
                               ) : user.isAdmin ? (
                                   // Admin case: Show button with action for "Remove Admin"
                                   <Button
-                                      className="px-4 py-2 min-w-[140px]"
+                                      className=" min-w-[140px]"
                                       disabled={pending[user.id]}
                                       onClick={() => handleAction(user.id, "remove")}
                                   >
@@ -61,7 +62,7 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
                               ) : (
                                   // Non-admin case: Show button for "Make Admin"
                                   <Button
-                                      className="px-4 py-2 min-w-[140px]"
+                                      className=" min-w-[140px]"
                                       disabled={pending[user.id]}
                                       onClick={() => handleAction(user.id, "make")}
                                   >
