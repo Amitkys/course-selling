@@ -1,3 +1,4 @@
+import { TableHeader, Table, TableRow, TableHead } from "@/components/ui/table";
 import { getTeacher } from "@/lib/actions/action";
 import { Suspense } from "react";
 
@@ -8,6 +9,15 @@ async function TeacherList() {
   return (
     <div>
       <h1 className="text-lg font-bold mb-4">All Teachers</h1>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Name</TableHead>
+            <TableHead>Branch</TableHead>
+            <TableHead className="text-right">Action</TableHead>
+          </TableRow>
+        </TableHeader>
+      </Table>
       {teachers.length > 0 ? (
         <ul className="space-y-2">
           {teachers.map((teacher) => (
