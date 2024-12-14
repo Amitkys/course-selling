@@ -1,4 +1,5 @@
-import { TableHeader, Table, TableRow, TableHead } from "@/components/ui/table";
+import { TableHeader, Table, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 import { getTeacher } from "@/lib/actions/action";
 import { Suspense } from "react";
 
@@ -17,18 +18,22 @@ async function TeacherList() {
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
+        {teachers.length > 0 ? (
+          <TableBody>
+            {teachers.map((teacher) => (
+              <TableRow key={teacher.id}>
+                <TableCell className="font-medium">{teacher.name.split(" ")[0]}</TableCell>
+                <TableCell>{teacher.branch ? teacher.branch : 'not given'}</TableCell>
+                <TableCell>
+                  <Button onClick={async () => await deleteTeacher(teacher.id)}>Remove</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        ) : (
+          <div>No Teachers found</div>
+        )}
       </Table>
-      {teachers.length > 0 ? (
-        <ul className="space-y-2">
-          {teachers.map((teacher) => (
-            <li key={teacher.id} className="p-2 border-b">
-              <strong>Name:</strong> {teacher.name} | <strong>Email:</strong> {teacher.email}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>No teachers found.</div>
-      )}
     </div>
   );
 }
