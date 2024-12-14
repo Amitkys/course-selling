@@ -15,13 +15,13 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 // server action function
 import  {handleDislike, handleLike} from "@/lib/actions/action";
-import { UserSession } from "@/lib/types";
+import { UserSession } from "@/lib/definitions";
+import { useToast } from "@/hooks/use-toast";
 // import utility
 import * as React from "react"
-import { useToast } from "@/hooks/use-toast";
-import { poppin } from "@/components/fonts";
+// import { poppin } from "@/components/fonts";
 import { inter } from "@/components/fonts";
-import { MainRenderPageType } from "@/lib/types";
+import { MainRenderPageType } from "@/lib/definitions";
 
 // format date and time
 function formatDateTime(dateString: Date): string {
@@ -56,7 +56,7 @@ function formatNumber(value: number): string {
 
 
 
-export default  function CardWithForm(
+export default  function RenderFeedback(
     {
         posts,
         session
@@ -92,7 +92,7 @@ export default  function CardWithForm(
 
                             {/* student feedback*/}
                             <CardContent className="flex justify-center mb-5">
-                                <CardDescription  className={`${poppin.className} antialiased`}>{post.statement}</CardDescription>
+                                <CardDescription  className={`${inter.className} antialiased text-lg    `}>{post.statement}</CardDescription>
                                 <br />
                             </CardContent>
 

@@ -1,6 +1,6 @@
-import CardWithForm from "@/components/renderFeedback";
+import RenderFeedback from "@/components/ui/posts/renderFeedback";
 import { getPost, getSessionFromServer } from "@/lib/actions/action";
-import { MainRenderPageType, UserSession } from "@/lib/types";
+import { MainRenderPageType, UserSession } from "@/lib/definitions";
 
 export default async function FeedbackServer() {
     // Fetch the logged-in user's session
@@ -14,7 +14,7 @@ export default async function FeedbackServer() {
     return (
         <div>
             {/* Pass posts and session to the child component */}
-            <CardWithForm posts={data} session={session} />
+            <RenderFeedback posts={data} session={session} />
         </div>
     );
 }

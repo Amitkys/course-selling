@@ -1,10 +1,10 @@
 "use server";
 import prisma from "@/lib/db";
-import { addNewStudentType } from "@/lib/types";
+import { addNewStudentType } from "@/lib/definitions";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
-import { MainRenderPageType, UserSession } from "@/lib/types";
+import { MainRenderPageType, UserSession } from "@/lib/definitions";
 
 import {  z } from "zod";
 import { TeacherSchema } from "@/app/addteacher/page";

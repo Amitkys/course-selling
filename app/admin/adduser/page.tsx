@@ -28,12 +28,12 @@ export default function PageAddUser() {
       <div className="grid w-full max-w-sm items-center gap-1.5 ml-3">
           <form action={handleForm}  method="POST">
               <Label htmlFor="roll">Roll</Label>
-              <Input className="mb-2" type="number" id="roll" name="rollNumber"></Input>
+              <Input className="mb-2" type="number" id="roll" name="rollNumber" required></Input>
               <p className=" mb-2 text-sm text-destructive" role="alert" aria-live="polite">
                   {rollError}
               </p>
               <Label htmlFor="text">Email</Label>
-              <Input className="mb-2" type="email" id="email" placeholder="Email" name="email" />
+              <Input className="mb-2" type="email" id="email" placeholder="Email" name="email" required />
               <p className=" mb-2 text-sm text-destructive" role="alert" aria-live="polite">
                   {emailError}
               </p>

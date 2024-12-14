@@ -1,5 +1,5 @@
 "use client";
-import { OpinionDataTypeForUser } from "@/lib/types"
+import { OpinionDataTypeForUser } from "@/lib/definitions"
 import {
     Card,
     CardContent,

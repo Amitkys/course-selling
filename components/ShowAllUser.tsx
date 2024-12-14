@@ -1,5 +1,5 @@
 "use client";
-import { UserType } from "@/lib/types";
+import { UserType } from "@/lib/definitions";
 import { makeAdmin, removeAdmin } from "@/lib/actions/user";
 import { useState } from "react";
 import {
