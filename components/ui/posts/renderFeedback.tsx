@@ -78,15 +78,26 @@ export default  function RenderFeedback(
 
                             {/* info about: user and teacher */}
                             <CardHeader>
-                                <div className="flex items-center justify-between mb-2" >
-                                    {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
-                                    <CardTitle className="text-lg font-normal text-zinc-400" >
+                                <div className="flex items-center justify-between mb-2">
+                                    {/* Checking session, if user verified, show their name and roll number, else show a special message: 'anonymous' */}
+                                    <CardTitle className="text-lg font-normal text-zinc-400 flex items-center">
                                         <Avatar>
-                                            <AvatarImage className=""src={session && session.user ? post.author.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbNbJ-fbEIoG7yXDjpCjacHB4VHgh35lJ-_fXoLJebS0vAGgp-WViWeN6WJ9hJtvQnnCQ&usqp=CAU'} ></AvatarImage>
+                                            <AvatarImage
+                                                className=""
+                                                src={
+                                                    session && session.user
+                                                        ? post.author.avatar
+                                                        : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbNbJ-fbEIoG7yXDjpCjacHB4VHgh35lJ-_fXoLJebS0vAGgp-WViWeN6WJ9hJtvQnnCQ&usqp=CAU'
+                                                }
+                                            />
                                             <AvatarFallback>...</AvatarFallback>
                                         </Avatar>
+                                        {/* Here, 5 will appear horizontally next to the profile */}
+                                        <div className="ml-2 text-sm font-medium text-zinc-400">• {session && session.user ? post.rollNumber : '• •'}</div>
                                     </CardTitle>
-                                    <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
+                                    <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>
+                                        {formatDateTime(post.createdAt)}
+                                    </CardTitle>
                                 </div>
                                 <hr />
                                 <div className="flex justify-center">
