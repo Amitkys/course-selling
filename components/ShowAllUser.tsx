@@ -42,7 +42,7 @@ export default function ShowAllUser({ data }: { data: UserType[] }) {
                   {data.map((user: UserType) => (
                       <TableRow key={user.id}>
                           <TableCell className="font-medium">{user.name.split(" ")[0]}</TableCell>
-                          <TableCell>{user.emailWithRoll.rollNumber ? user.emailWithRoll.rollNumber : '...'}</TableCell>
+                          <TableCell>{user.emailWithRoll.rollNumber}</TableCell>
                           <TableCell className="text-right">
                               {user.isSuperAdmin ? (
                                   // SuperAdmin case: Show disabled button

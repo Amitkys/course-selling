@@ -97,6 +97,7 @@ export type MainRenderPageType = {
     author: {
         name: string; // Author's name
         email: string; // Author's email
+        avatar: string;
     };
 };
 

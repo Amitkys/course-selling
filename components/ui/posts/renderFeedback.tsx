@@ -22,7 +22,7 @@ import * as React from "react"
 // import { poppin } from "@/components/fonts";
 import { inter } from "@/components/fonts";
 import { MainRenderPageType } from "@/lib/definitions";
-
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 // format date and time
 function formatDateTime(dateString: Date): string {
     const date = new Date(dateString);
@@ -78,9 +78,14 @@ export default  function RenderFeedback(
 
                             {/* info about: user and teacher */}
                             <CardHeader>
-                                <div className="flex justify-between mb-2" >
+                                <div className="flex items-center justify-between mb-2" >
                                     {/* checking session, if user verified, show their name and roll number, else, show a special message: 'anonymouse' */}
-                                    <CardTitle className="text-lg font-normal text-zinc-400" >{session && session.user ? post.author.name : "anonymouse"}({session && session.user ? post.rollNumber : "***"})</CardTitle>
+                                    <CardTitle className="text-lg font-normal text-zinc-400" >
+                                        <Avatar>
+                                            <AvatarImage className=""src={session && session.user ? post.author.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbNbJ-fbEIoG7yXDjpCjacHB4VHgh35lJ-_fXoLJebS0vAGgp-WViWeN6WJ9hJtvQnnCQ&usqp=CAU'} ></AvatarImage>
+                                            <AvatarFallback>...</AvatarFallback>
+                                        </Avatar>
+                                    </CardTitle>
                                     <CardTitle className={`text-zinc-400 text-xs ${inter.className} antialiased`}>{formatDateTime(post.createdAt)}</CardTitle>
                                 </div>
                                 <hr />

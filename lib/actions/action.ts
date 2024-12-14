@@ -92,19 +92,6 @@ export async function addOpinion(formData: FormData) {
 
 }
 
-// add new student with roll number
-export async function addNewStudent(data: addNewStudentType ) {
-    const prismaData = {
-        email: data.email,
-        rollNumber: data.rollNumber
-    }
-
-    const res = await prisma.emailWithRoll.create({
-        data: prismaData
-    });
-
-    console.log('data added');
-}
 
 // getting all feedback
 export async function getPost(isSessionAvailable: boolean): Promise<MainRenderPageType[]> {
@@ -127,6 +114,7 @@ export async function getPost(isSessionAvailable: boolean): Promise<MainRenderPa
                     select: {
                         name: true,
                         email: true,
+                        avatar: true,
                     },
                 },
                 reactions: {
