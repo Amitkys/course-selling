@@ -55,7 +55,7 @@ export default function ShowAllTeacher({ teachers }: { teachers: TeacherType[] }
                 <TableCell className="text-right">
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button variant="outline">Remove</Button>
+                      <Button className="min-w-[140px]" >Remove</Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
