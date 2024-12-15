@@ -7,7 +7,6 @@ import Teacher from "@/app/teacher/page";
 export default function HomePage() {
   return (
     <>
-
       <div>
         <ButtonGroup />
       </div>
